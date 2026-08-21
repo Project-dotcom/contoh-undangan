@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Undangan Pernikahan — [Nama Mempelai Wanita] &amp; [Nama Mempelai Pria]</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -136,10 +136,10 @@
         .cover-inner {
             position: relative;
             text-align: center;
-            padding: 56px 34px;
+            padding: 40px 24px;
             border: 1px solid rgba(227, 200, 146, 0.45);
             max-width: 380px;
-            width: calc(100% - 48px);
+            width: calc(100% - 32px);
             animation: fadeUp 1.1s ease both;
             background: rgba(46, 20, 27, 0.35);
             backdrop-filter: blur(2px);
@@ -161,7 +161,7 @@
         .cover-names {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: clamp(2.1rem, 8vw, 2.9rem);
+            font-size: clamp(1.8rem, 7vw, 2.9rem);
             line-height: 1.25;
             margin: 18px 0 6px;
             color: var(--ivory);
@@ -172,27 +172,27 @@
             padding: 0 6px;
         }
         .cover-sub {
-            font-size: .82rem;
+            font-size: .75rem;
             letter-spacing: .06em;
             color: var(--gold-soft);
             margin-top: 6px;
         }
         .cover-to {
-            margin-top: 26px;
-            font-size: .85rem;
+            margin-top: 20px;
+            font-size: .8rem;
             color: #EBD9D6;
             line-height: 1.7;
         }
         .btn-open {
-            margin-top: 30px;
+            margin-top: 24px;
             font-family: var(--font-body);
             letter-spacing: .2em;
             text-transform: uppercase;
-            font-size: .72rem;
+            font-size: .68rem;
             color: var(--ink);
             background: linear-gradient(135deg, var(--gold-soft), var(--gold));
             border: none;
-            padding: 14px 30px;
+            padding: 12px 26px;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
@@ -331,18 +331,18 @@
             z-index: 6;
             cursor: pointer;
             pointer-events: auto;
-            width: clamp(140px, 22vw, 220px);
-            height: clamp(140px, 22vw, 220px);
+            width: clamp(110px, 20vw, 200px);
+            height: clamp(110px, 20vw, 200px);
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
             top: 50%;
             transform: translateY(-50%);
         }
         .penutup .side-flower.left {
-            left: -30px;
+            left: -20px;
         }
         .penutup .side-flower.right {
-            right: -30px;
+            right: -20px;
         }
         .side-flower-inner {
             display: block;
@@ -389,17 +389,29 @@
         }
         @media (max-width: 560px) {
             .penutup .side-flower {
-                width: clamp(100px, 28vw, 140px);
-                height: clamp(100px, 28vw, 140px);
+                width: clamp(90px, 22vw, 130px);
+                height: clamp(90px, 22vw, 130px);
             }
             .penutup .side-flower.left {
-                left: -20px;
+                left: -12px;
             }
             .penutup .side-flower.right {
-                right: -20px;
+                right: -12px;
             }
             .penutup .side-flower .side-flower-inner {
                 opacity: .7;
+            }
+        }
+        @media (max-width: 400px) {
+            .penutup .side-flower {
+                width: 80px;
+                height: 80px;
+            }
+            .penutup .side-flower.left {
+                left: -8px;
+            }
+            .penutup .side-flower.right {
+                right: -8px;
             }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -411,11 +423,11 @@
         /* ===== MUSIC TOGGLE ===== */
         #musicToggle {
             position: fixed;
-            right: 16px;
+            right: 12px;
             bottom: 16px;
             z-index: 70;
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             border: 1px solid var(--gold-soft);
             background: linear-gradient(135deg, var(--ink), var(--ink-deep));
@@ -429,8 +441,8 @@
             -webkit-tap-highlight-color: transparent;
         }
         #musicToggle svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
         }
         #musicToggle .ring {
             position: absolute;
@@ -453,6 +465,18 @@
                 opacity: 0;
             }
         }
+        @media (max-width: 480px) {
+            #musicToggle {
+                right: 10px;
+                bottom: 12px;
+                width: 44px;
+                height: 44px;
+            }
+            #musicToggle svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
 
         /* ===== MAIN CONTENT ===== */
         #content {
@@ -466,7 +490,7 @@
         section {
             max-width: var(--container);
             margin: 0 auto;
-            padding: 70px 26px;
+            padding: 60px 20px;
             position: relative;
         }
         .section-dark {
@@ -479,7 +503,7 @@
         .section-dark>.inner {
             max-width: var(--container);
             margin: 0 auto;
-            padding: 70px 26px;
+            padding: 60px 20px;
             position: relative;
         }
         .section-blush {
@@ -489,14 +513,14 @@
         .section-blush>.inner {
             max-width: var(--container);
             margin: 0 auto;
-            padding: 70px 26px;
+            padding: 60px 20px;
             position: relative;
         }
 
         /* ===== HERO ===== */
         .hero {
             text-align: center;
-            padding-top: 90px;
+            padding-top: 80px;
             position: relative;
             overflow: hidden;
         }
@@ -513,29 +537,30 @@
             font-family: var(--font-display);
             font-style: italic;
             color: var(--rose-deep);
-            font-size: 1.05rem;
-            margin-top: 16px;
+            font-size: 1rem;
+            margin-top: 14px;
         }
         .hero h1 {
-            font-size: clamp(2.4rem, 9vw, 3.6rem);
+            font-size: clamp(2.2rem, 8vw, 3.6rem);
             font-style: italic;
-            margin-top: 20px;
+            margin-top: 16px;
             line-height: 1.2;
         }
         .hero .amp {
             display: block;
             color: var(--gold);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin: 6px 0;
         }
         .hero .to-whom {
-            margin-top: 34px;
-            font-size: .92rem;
-            line-height: 1.9;
+            margin-top: 28px;
+            font-size: .88rem;
+            line-height: 1.8;
             color: var(--text);
             max-width: 440px;
             margin-left: auto;
             margin-right: auto;
+            padding: 0 10px;
         }
 
         /* ===== SECTION FLOWERS (unique per section, decorative) ===== */
@@ -625,27 +650,27 @@
         /* ===== QUOTE ===== */
         .quote-box {
             border: 1px solid var(--line);
-            padding: 46px 30px;
+            padding: 36px 20px;
             text-align: center;
             position: relative;
         }
         .quote-arabic {
-            font-size: clamp(1.3rem, 4.5vw, 1.7rem);
+            font-size: clamp(1.2rem, 4vw, 1.7rem);
             line-height: 2.2;
             color: var(--rose-deep);
             direction: rtl;
         }
         .quote-trans {
-            margin-top: 20px;
+            margin-top: 16px;
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.05rem;
-            line-height: 1.75;
+            font-size: 1rem;
+            line-height: 1.7;
             color: var(--text);
         }
         .quote-source {
-            margin-top: 16px;
-            font-size: .72rem;
+            margin-top: 14px;
+            font-size: .68rem;
             letter-spacing: .18em;
             text-transform: uppercase;
             color: var(--gold);
@@ -663,31 +688,31 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
-            gap: 18px;
-            margin-top: 34px;
+            gap: 14px;
+            margin-top: 30px;
         }
         .mempelai-amp {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--rose);
         }
         .person h3 {
-            font-size: clamp(1.5rem, 6vw, 1.9rem);
+            font-size: clamp(1.4rem, 5vw, 1.9rem);
             font-style: italic;
         }
         .person .rel {
-            font-size: .72rem;
+            font-size: .68rem;
             letter-spacing: .1em;
             color: var(--rose-deep);
             margin-top: 6px;
             text-transform: uppercase;
         }
         .person .parents {
-            margin-top: 14px;
-            font-size: .86rem;
+            margin-top: 12px;
+            font-size: .82rem;
             color: var(--text);
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         /* ===== ACARA ===== */
@@ -699,29 +724,29 @@
             text-align: center;
             margin-top: 14px;
             font-style: italic;
-            font-size: clamp(1.7rem, 6vw, 2.2rem);
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
             color: var(--ivory);
         }
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin: 36px 0 42px;
+            gap: 10px;
+            margin: 30px 0 36px;
             flex-wrap: wrap;
         }
         .countdown .box {
             border: 1px solid var(--line);
-            padding: 14px 16px;
-            min-width: 68px;
+            padding: 12px 14px;
+            min-width: 60px;
             text-align: center;
         }
         .countdown .num {
             font-family: var(--font-display);
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             color: var(--gold-soft);
         }
         .countdown .lbl {
-            font-size: .62rem;
+            font-size: .58rem;
             letter-spacing: .14em;
             text-transform: uppercase;
             color: #D9B9C0;
@@ -729,24 +754,24 @@
         }
         .event-cards {
             display: grid;
-            gap: 20px;
+            gap: 18px;
             grid-template-columns: 1fr 1fr;
         }
         .event-card {
             border: 1px solid var(--line);
-            padding: 28px 20px;
+            padding: 24px 16px;
             text-align: center;
         }
         .event-card .name {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.35rem;
-            margin-bottom: 12px;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
             color: var(--gold-soft);
         }
         .event-card p {
-            font-size: .85rem;
-            line-height: 1.8;
+            font-size: .8rem;
+            line-height: 1.7;
             color: #EBD9D6;
         }
         .event-card .day {
@@ -765,28 +790,28 @@
         .lokasi h2 {
             margin-top: 14px;
             font-style: italic;
-            font-size: clamp(1.7rem, 6vw, 2.1rem);
+            font-size: clamp(1.6rem, 5vw, 2.1rem);
         }
         .lokasi address {
             font-style: normal;
-            margin-top: 18px;
-            font-size: .92rem;
-            line-height: 1.9;
+            margin-top: 16px;
+            font-size: .88rem;
+            line-height: 1.8;
             color: var(--text);
         }
         .btn-outline {
-            margin-top: 26px;
+            margin-top: 24px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             border: 1px solid var(--rose-deep);
             color: var(--rose-deep);
             background: transparent;
-            padding: 12px 26px;
+            padding: 10px 22px;
             font-family: var(--font-body);
             letter-spacing: .16em;
             text-transform: uppercase;
-            font-size: .7rem;
+            font-size: .65rem;
             cursor: pointer;
             transition: background .25s ease, color .25s ease;
             text-decoration: none;
@@ -804,7 +829,7 @@
             font-family: var(--font-display);
             font-style: italic;
             color: var(--rose-deep);
-            font-size: clamp(1.05rem, 4vw, 1.3rem);
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
             line-height: 2;
             max-width: 400px;
             margin: 0 auto;
@@ -819,47 +844,48 @@
             text-align: center;
             margin-top: 14px;
             font-style: italic;
-            font-size: clamp(1.7rem, 6vw, 2.1rem);
+            font-size: clamp(1.6rem, 5vw, 2.1rem);
             color: var(--ivory);
         }
         .hadiah .sub {
             text-align: center;
             margin-top: 12px;
-            font-size: .86rem;
+            font-size: .82rem;
             color: #EBD9D6;
             max-width: 420px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.8;
+            line-height: 1.7;
         }
         .gift-cards {
             display: grid;
-            gap: 16px;
-            margin-top: 34px;
+            gap: 14px;
+            margin-top: 30px;
         }
         .gift-card {
             border: 1px solid var(--line);
-            padding: 22px 20px;
+            padding: 18px 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .gift-card .bank {
-            font-size: .68rem;
+            font-size: .62rem;
             letter-spacing: .14em;
             text-transform: uppercase;
             color: var(--gold-soft);
         }
         .gift-card .num {
             font-family: var(--font-display);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-top: 4px;
             color: var(--ivory);
+            word-break: break-all;
         }
         .gift-card .holder {
-            font-size: .78rem;
+            font-size: .72rem;
             color: #D9B9C0;
             margin-top: 4px;
         }
@@ -867,12 +893,13 @@
             border: 1px solid var(--gold-soft);
             color: var(--gold-soft);
             background: transparent;
-            padding: 9px 18px;
-            font-size: .68rem;
+            padding: 8px 16px;
+            font-size: .62rem;
             letter-spacing: .14em;
             text-transform: uppercase;
             cursor: pointer;
             transition: background .25s ease, color .25s ease;
+            white-space: nowrap;
         }
         .btn-copy:hover {
             background: var(--gold-soft);
@@ -887,27 +914,29 @@
         .penutup {
             text-align: center;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            padding-bottom: 60px;
         }
         .penutup .quote-trans {
             max-width: 420px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
+            padding: 0 10px;
         }
         .penutup .families {
-            margin-top: 34px;
-            font-size: .9rem;
+            margin-top: 30px;
+            font-size: .88rem;
             line-height: 2;
             color: var(--text);
             position: relative;
             z-index: 2;
         }
         .penutup h2 {
-            margin-top: 22px;
+            margin-top: 20px;
             font-family: var(--font-display);
             font-style: italic;
-            font-size: clamp(1.9rem, 7vw, 2.4rem);
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
             color: var(--rose-deep);
             position: relative;
             z-index: 2;
@@ -919,30 +948,131 @@
 
         footer {
             text-align: center;
-            padding: 30px 20px 44px;
-            font-size: .68rem;
+            padding: 24px 20px 34px;
+            font-size: .62rem;
             letter-spacing: .12em;
             color: var(--rose);
             text-transform: uppercase;
         }
 
-        @media (max-width: 560px) {
+        /* ===== RESPONSIVE TWEAKS ===== */
+        @media (max-width: 600px) {
+            section {
+                padding: 48px 16px;
+            }
+            .section-dark>.inner {
+                padding: 48px 16px;
+            }
+            .section-blush>.inner {
+                padding: 48px 16px;
+            }
+            .hero {
+                padding-top: 60px;
+            }
+            .hero h1 {
+                font-size: clamp(2rem, 7vw, 2.8rem);
+            }
+            .cover-inner {
+                padding: 32px 20px;
+                width: calc(100% - 24px);
+            }
+            .cover-names {
+                font-size: clamp(1.6rem, 6vw, 2.4rem);
+            }
+            .countdown .box {
+                min-width: 52px;
+                padding: 10px 12px;
+            }
+            .countdown .num {
+                font-size: 1.3rem;
+            }
             .event-cards {
                 grid-template-columns: 1fr;
             }
             .mempelai-grid {
                 grid-template-columns: 1fr;
-                gap: 10px;
+                gap: 8px;
             }
             .mempelai-amp {
                 transform: rotate(90deg);
                 margin: 6px 0;
             }
             .cover-flower {
-                width: min(100vw, 320px);
+                width: min(100vw, 300px);
                 opacity: .15;
             }
+            .divider {
+                padding: 28px 16px;
+                gap: 10px;
+            }
+            .quote-box {
+                padding: 28px 16px;
+            }
+            .gift-card {
+                padding: 14px 12px;
+            }
+            .gift-card .num {
+                font-size: 1rem;
+            }
+            .btn-copy {
+                padding: 6px 12px;
+                font-size: .58rem;
+            }
         }
+
+        @media (max-width: 400px) {
+            section {
+                padding: 36px 12px;
+            }
+            .section-dark>.inner {
+                padding: 36px 12px;
+            }
+            .section-blush>.inner {
+                padding: 36px 12px;
+            }
+            .hero {
+                padding-top: 48px;
+            }
+            .hero h1 {
+                font-size: clamp(1.7rem, 6vw, 2.2rem);
+            }
+            .cover-inner {
+                padding: 24px 16px;
+            }
+            .cover-names {
+                font-size: clamp(1.4rem, 5vw, 1.8rem);
+            }
+            .cover-sub {
+                font-size: .68rem;
+            }
+            .btn-open {
+                padding: 10px 20px;
+                font-size: .62rem;
+            }
+            .countdown {
+                gap: 6px;
+            }
+            .countdown .box {
+                min-width: 44px;
+                padding: 8px 10px;
+            }
+            .countdown .num {
+                font-size: 1.1rem;
+            }
+            .countdown .lbl {
+                font-size: .5rem;
+            }
+            .event-card {
+                padding: 18px 12px;
+            }
+            .event-card .name {
+                font-size: 1.1rem;
+            }
+            .lokasi address {
+                font-size: .8rem;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: .01ms !important;
@@ -1023,7 +1153,7 @@
 
     <!-- ===== MUSIC ===== -->
     <audio id="bgMusic" loop preload="none">
-        <source src="musik-bernaung-feby-putri.mp3" type="audio/mpeg" />
+        <source src="musik-bernaung-feby-putri-reff.mp3" type="audio/mpeg" />
     </audio>
     <button id="musicToggle" type="button" aria-label="Putar / jeda musik">
         <span class="ring"></span>
@@ -1135,7 +1265,7 @@
             <svg class="section-flower section-flower-lg sf-acara" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
             <div class="inner">
                 <p class="eyebrow" style="text-align:center;color:var(--gold-soft);">Save The Date</p>
-                <h2 style="text-align:center;margin-top:14px;font-style:italic;font-size:clamp(1.7rem,6vw,2.2rem);color:var(--ivory);">Hari Bahagia Kami</h2>
+                <h2 style="text-align:center;margin-top:14px;font-style:italic;font-size:clamp(1.6rem,5vw,2.2rem);color:var(--ivory);">Hari Bahagia Kami</h2>
 
                 <div class="countdown" id="countdown">
                     <div class="box"><div class="num" id="cd-days">00</div><div class="lbl">Hari</div></div>
