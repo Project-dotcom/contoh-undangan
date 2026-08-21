@@ -472,33 +472,41 @@
             }
         }
 
-        /* ===== MUSIC TOGGLE ===== */
+        /* ===== MUSIC TOGGLE (now at top-right, safe and non-intrusive) ===== */
         #musicToggle {
             position: fixed;
-            right: 12px;
-            bottom: 16px;
+            top: 16px;
+            right: 16px;
             z-index: 70;
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             border: 1px solid var(--gold-soft);
-            background: linear-gradient(135deg, var(--ink), var(--ink-deep));
+            background: rgba(46, 20, 27, 0.7);
+            backdrop-filter: blur(4px);
             color: var(--gold-soft);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(46, 20, 27, .35);
+            box-shadow: 0 4px 14px rgba(46, 20, 27, .3);
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
+            transition: background .3s ease, transform .2s ease;
+        }
+        #musicToggle:hover {
+            background: rgba(62, 30, 39, 0.85);
+        }
+        #musicToggle:active {
+            transform: scale(.92);
         }
         #musicToggle svg {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
         }
         #musicToggle .ring {
             position: absolute;
-            inset: -6px;
+            inset: -4px;
             border-radius: 50%;
             border: 1px solid var(--gold-soft);
             opacity: 0;
@@ -519,14 +527,14 @@
         }
         @media (max-width: 480px) {
             #musicToggle {
-                right: 10px;
-                bottom: 12px;
-                width: 44px;
-                height: 44px;
+                top: 12px;
+                right: 12px;
+                width: 36px;
+                height: 36px;
             }
             #musicToggle svg {
-                width: 18px;
-                height: 18px;
+                width: 16px;
+                height: 16px;
             }
         }
 
