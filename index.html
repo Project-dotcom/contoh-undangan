@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>Undangan Pernikahan — [Nama Mempelai Wanita] &amp; [Nama Mempelai Pria]</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1125,6 +1125,92 @@
             }
         }
 
+        /* ===== ADDITIONAL MOBILE FIXES (no overflow, proper sizing) ===== */
+        @media (max-width: 600px) {
+            body {
+                overflow-x: hidden;
+                width: 100%;
+            }
+            .gift-card {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .gift-card .btn-copy {
+                align-self: flex-end;
+                margin-top: 4px;
+            }
+            .penutup .side-flower {
+                width: 70px;
+                height: 70px;
+            }
+            .penutup .side-flower.left {
+                left: -8px;
+            }
+            .penutup .side-flower.right {
+                right: -8px;
+            }
+            .cover-flower {
+                display: none;
+            }
+            .cover-inner {
+                padding: 24px 16px;
+            }
+            .cover-to {
+                font-size: .75rem;
+            }
+            .btn-open {
+                padding: 10px 18px;
+                font-size: .62rem;
+            }
+            .section-flower-lg,
+            .section-flower-md,
+            .section-flower-sm {
+                width: 40vw !important;
+                max-width: 160px;
+            }
+            .sf-hero,
+            .sf-mempelai-l,
+            .sf-mempelai-r,
+            .sf-verse,
+            .sf-acara,
+            .sf-lokasi,
+            .sf-hadiah,
+            .sf-penutup {
+                opacity: 0.1;
+            }
+            .countdown .box {
+                min-width: 48px;
+                padding: 8px 10px;
+            }
+            .countdown .num {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .penutup .side-flower {
+                width: 60px;
+                height: 60px;
+            }
+            .penutup .side-flower.left {
+                left: -6px;
+            }
+            .penutup .side-flower.right {
+                right: -6px;
+            }
+            .countdown .box {
+                min-width: 40px;
+                padding: 6px 8px;
+            }
+            .countdown .num {
+                font-size: 1rem;
+            }
+            .countdown .lbl {
+                font-size: .45rem;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: .01ms !important;
@@ -1416,7 +1502,7 @@
             </p>
         </section>
 
-        <footer>Frn Project — Undangan Pernikahan Digital</footer>
+        <footer>FRN PROJECT — Undangan Pernikahan Digital</footer>
     </main>
 
     <script>
