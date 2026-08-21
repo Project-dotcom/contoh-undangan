@@ -1,946 +1,1472 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Undangan Pernikahan — [Nama Mempelai Wanita] & [Nama Mempelai Pria]</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  /* ===================== DESIGN TOKENS ===================== */
-  :root{
-    --ink:#3E1E27;          /* deep rosewood — dark sections */
-    --ink-deep:#2E141B;
-    --ivory:#FFF8F3;        /* warm cream white */
-    --blush:#F7E3E2;        /* soft blush pink */
-    --rose:#C97B90;         /* dusty rose — primary accent */
-    --rose-deep:#8B4A5C;    /* deeper rose for emphasis */
-    --gold:#CBA35C;
-    --gold-soft:#E3C892;
-    --sage:#9DB08F;         /* soft leaf green */
-    --text:#4A3439;         /* warm dark brown for body copy */
-    --line:rgba(203,163,92,0.4);
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Jost', sans-serif;
-    --container: 640px;
-  }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pernikahan — [Nama Mempelai Wanita] &amp; [Nama Mempelai Pria]</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== DESIGN TOKENS ===== */
+        :root {
+            --ink: #3E1E27;
+            --ink-deep: #2E141B;
+            --ivory: #FFF8F3;
+            --blush: #F7E3E2;
+            --rose: #C97B90;
+            --rose-deep: #8B4A5C;
+            --gold: #CBA35C;
+            --gold-soft: #E3C892;
+            --sage: #9DB08F;
+            --sage-deep: #7A8D6E;
+            --text: #4A3439;
+            --line: rgba(203, 163, 92, 0.4);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Jost', sans-serif;
+            --container: 640px;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            margin: 0;
+            background: var(--ivory);
+            color: var(--text);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
+        }
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-display);
+            font-weight: 500;
+            margin: 0;
+        }
+        p {
+            margin: 0;
+        }
+        .eyebrow {
+            font-family: var(--font-body);
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            font-size: .7rem;
+            font-weight: 500;
+        }
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--ivory);
-    color:var(--text);
-    font-family:var(--font-body);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  body.locked{overflow:hidden; height:100vh;}
+        /* ===== CORNER FRAME ===== */
+        .corner-frame {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .corner-frame svg {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            opacity: .9;
+        }
+        .corner-frame .tl {
+            top: 14px;
+            left: 14px;
+        }
+        .corner-frame .tr {
+            top: 14px;
+            right: 14px;
+            transform: scaleX(-1);
+        }
+        .corner-frame .bl {
+            bottom: 14px;
+            left: 14px;
+            transform: scaleY(-1);
+        }
+        .corner-frame .br {
+            bottom: 14px;
+            right: 14px;
+            transform: scale(-1, -1);
+        }
 
-  h1,h2,h3{font-family:var(--font-display); font-weight:500; margin:0;}
-  p{margin:0;}
-  .eyebrow{
-    font-family:var(--font-body);
-    letter-spacing:.28em;
-    text-transform:uppercase;
-    font-size:.7rem;
-    font-weight:500;
-  }
+        /* ===== DIVIDER ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding: 36px 20px;
+            max-width: var(--container);
+            margin: 0 auto;
+        }
+        .divider .rule {
+            height: 1px;
+            flex: 1;
+            background: var(--line);
+        }
+        .sprig {
+            width: 26px;
+            height: 26px;
+            flex: none;
+        }
 
-  /* ===================== FLORAL ORNAMENTS ===================== */
-  .corner-frame{position:absolute; inset:0; pointer-events:none;}
-  .corner-frame svg{position:absolute; width:70px; height:70px; opacity:.9;}
-  .corner-frame .tl{top:14px; left:14px;}
-  .corner-frame .tr{top:14px; right:14px; transform:scaleX(-1);}
-  .corner-frame .bl{bottom:14px; left:14px; transform:scaleY(-1);}
-  .corner-frame .br{bottom:14px; right:14px; transform:scale(-1,-1);}
+        /* ===== COVER ===== */
+        #cover {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: radial-gradient(circle at 50% 15%, rgba(203, 123, 144, 0.35), transparent 55%),
+                linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%);
+            color: var(--ivory);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        #cover.opened {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .cover-inner {
+            position: relative;
+            text-align: center;
+            padding: 56px 34px;
+            border: 1px solid rgba(227, 200, 146, 0.45);
+            max-width: 380px;
+            width: calc(100% - 48px);
+            animation: fadeUp 1.1s ease both;
+            background: rgba(46, 20, 27, 0.35);
+            backdrop-filter: blur(2px);
+            z-index: 2;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .cover-inner .eyebrow {
+            color: var(--gold-soft);
+        }
+        .cover-names {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: clamp(2.1rem, 8vw, 2.9rem);
+            line-height: 1.25;
+            margin: 18px 0 6px;
+            color: var(--ivory);
+        }
+        .cover-amp {
+            color: var(--rose);
+            font-size: 1.1em;
+            padding: 0 6px;
+        }
+        .cover-sub {
+            font-size: .82rem;
+            letter-spacing: .06em;
+            color: var(--gold-soft);
+            margin-top: 6px;
+        }
+        .cover-to {
+            margin-top: 26px;
+            font-size: .85rem;
+            color: #EBD9D6;
+            line-height: 1.7;
+        }
+        .btn-open {
+            margin-top: 30px;
+            font-family: var(--font-body);
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            font-size: .72rem;
+            color: var(--ink);
+            background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+            border: none;
+            padding: 14px 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform .25s ease, box-shadow .25s ease, opacity .35s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-open:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(203, 163, 92, .35);
+        }
+        .btn-open:active {
+            transform: translateY(0) scale(.97);
+        }
+        .btn-open:focus-visible {
+            outline: 2px solid var(--ivory);
+            outline-offset: 3px;
+        }
+        .btn-open[disabled] {
+            pointer-events: none;
+        }
 
-  .divider{
-    display:flex; align-items:center; justify-content:center;
-    gap:14px; padding:36px 20px; max-width:var(--container); margin:0 auto;
-  }
-  .divider .rule{height:1px; flex:1; background:var(--line);}
+        /* ===== BIG COVER FLOWER ===== */
+        .cover-flower {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.3) rotate(-6deg);
+            width: min(90vw, 440px);
+            height: auto;
+            color: var(--rose);
+            opacity: .20;
+            z-index: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 8px 30px rgba(46, 20, 27, .4));
+        }
 
-  .sprig{ /* small floral sprig used as divider glyph */
-    width:26px; height:26px; flex:none;
-  }
+        /* ===== BLOOM OVERLAY ===== */
+        #bloomOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .bloom-flower {
+            width: min(58vw, 240px);
+            height: min(58vw, 240px);
+            opacity: 0;
+            transform: scale(.15) rotate(-14deg);
+            filter: drop-shadow(0 12px 26px rgba(46, 20, 27, .5));
+        }
+        .bloom-flower.grow {
+            animation: bloomGrow .78s cubic-bezier(.34, 1.35, .4, 1) forwards;
+        }
+        .bloom-flower.burst {
+            animation: bloomBurstOut .55s ease-in forwards;
+        }
+        @keyframes bloomGrow {
+            0% {
+                opacity: 0;
+                transform: scale(.15) rotate(-14deg);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.14) rotate(4deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        @keyframes bloomBurstOut {
+            0% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.6) rotate(10deg);
+            }
+        }
+        .burst-petal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            will-change: transform, opacity;
+            transform: translate(-50%, -50%) scale(.5) rotate(0deg);
+            opacity: 1;
+        }
+        .burst-petal svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .bloom-flower.grow,
+            .bloom-flower.burst {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+            .burst-petal {
+                transition: none !important;
+                opacity: 0 !important;
+            }
+        }
 
-  /* ===================== COVER ===================== */
-  #cover{
-    position:fixed; inset:0; z-index:50;
-    background:
-      radial-gradient(circle at 50% 15%, rgba(203,123,144,0.35), transparent 55%),
-      linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%);
-    color:var(--ivory);
-    display:flex; align-items:center; justify-content:center;
-    transition:opacity 1s ease, visibility 1s ease;
-  }
-  #cover.opened{opacity:0; visibility:hidden; pointer-events:none;}
-  #cover .petals{position:absolute; inset:0; overflow:hidden; opacity:.85; perspective:600px;}
-  .petal{position:absolute; top:-40px; will-change:transform, margin-left; filter:drop-shadow(0 3px 5px rgba(46,20,27,0.25));}
-  .petal-spin{display:block; width:100%; height:100%; transform-style:preserve-3d; will-change:transform;}
-  .petal svg{display:block;}
-  .cover-inner{
-    position:relative; text-align:center; padding:56px 34px;
-    border:1px solid rgba(227,200,146,0.45);
-    max-width:380px; width:calc(100% - 48px);
-    animation:fadeUp 1.1s ease both;
-    background:rgba(46,20,27,0.35);
-    backdrop-filter:blur(2px);
-  }
-  @keyframes fadeUp{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+        /* ===== FX OVERLAY (petal burst from side flowers) ===== */
+        #fxOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 65;
+            pointer-events: none;
+        }
+        .fx-petal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            will-change: transform, opacity;
+            transform: translate(-50%, -50%) scale(.5) rotate(0deg);
+            opacity: 1;
+        }
+        .fx-petal svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
 
-  .cover-inner .eyebrow{color:var(--gold-soft);}
-  .cover-names{
-    font-family:var(--font-display); font-style:italic;
-    font-size:clamp(2.1rem, 8vw, 2.9rem);
-    line-height:1.25; margin:18px 0 6px;
-    color:var(--ivory);
-  }
-  .cover-amp{color:var(--rose); font-size:1.1em; padding:0 6px;}
-  .cover-sub{font-size:.82rem; letter-spacing:.06em; color:var(--gold-soft); margin-top:6px;}
-  .cover-to{margin-top:26px; font-size:.85rem; color:#EBD9D6; line-height:1.7;}
-  .btn-open{
-    margin-top:30px;
-    font-family:var(--font-body); letter-spacing:.2em; text-transform:uppercase;
-    font-size:.72rem; color:var(--ink);
-    background:linear-gradient(135deg, var(--gold-soft), var(--gold));
-    border:none; padding:14px 30px; cursor:pointer;
-    display:inline-flex; align-items:center; gap:10px;
-    transition:transform .25s ease, box-shadow .25s ease, opacity .35s ease;
-    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
-  }
-  .btn-open:hover{transform:translateY(-2px); box-shadow:0 8px 20px rgba(203,163,92,.35);}
-  .btn-open:active{transform:translateY(0) scale(.97);}
-  .btn-open:focus-visible{outline:2px solid var(--ivory); outline-offset:3px;}
-  .btn-open[disabled]{pointer-events:none;}
+        /* ===== SIDE 3D FLOWERS (now inside the final section) ===== */
+        .penutup .side-flower {
+            position: absolute;
+            z-index: 6;
+            cursor: pointer;
+            pointer-events: auto;
+            width: clamp(140px, 22vw, 220px);
+            height: clamp(140px, 22vw, 220px);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .penutup .side-flower.left {
+            left: -30px;
+        }
+        .penutup .side-flower.right {
+            right: -30px;
+        }
+        .side-flower-inner {
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: var(--rose);
+            opacity: .65;
+            filter: drop-shadow(0 8px 24px rgba(46, 20, 27, .35));
+            transform-style: preserve-3d;
+            animation: floatSide3d var(--dur, 8s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+            transition: transform .4s cubic-bezier(.34, 1.7, .4, 1), filter .3s ease, opacity .3s ease;
+        }
+        .side-flower-inner svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .penutup .side-flower:hover .side-flower-inner {
+            filter: drop-shadow(0 12px 28px rgba(46, 20, 27, .45));
+            opacity: .9;
+        }
+        .penutup .side-flower.popped .side-flower-inner {
+            animation: none !important;
+            transform: scale(1.5) rotateY(0deg) !important;
+            opacity: 1;
+        }
+        @keyframes floatSide3d {
+            0% {
+                transform: translateY(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+            }
+            25% {
+                transform: translateY(-18px) rotateY(120deg) rotateX(14deg) rotateZ(4deg);
+            }
+            50% {
+                transform: translateY(0) rotateY(220deg) rotateX(-10deg) rotateZ(-4deg);
+            }
+            75% {
+                transform: translateY(18px) rotateY(300deg) rotateX(10deg) rotateZ(3deg);
+            }
+            100% {
+                transform: translateY(0) rotateY(360deg) rotateX(0deg) rotateZ(0deg);
+            }
+        }
+        @media (max-width: 560px) {
+            .penutup .side-flower {
+                width: clamp(100px, 28vw, 140px);
+                height: clamp(100px, 28vw, 140px);
+            }
+            .penutup .side-flower.left {
+                left: -20px;
+            }
+            .penutup .side-flower.right {
+                right: -20px;
+            }
+            .penutup .side-flower .side-flower-inner {
+                opacity: .7;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .side-flower-inner {
+                animation: none;
+            }
+        }
 
-  /* ===================== BUNGA BESAR & PECAHAN KELOPAK (buka undangan) ===================== */
-  #bloomOverlay{
-    position:fixed; inset:0; z-index:60;
-    display:flex; align-items:center; justify-content:center;
-    pointer-events:none;
-  }
-  .bloom-flower{
-    width:min(58vw, 240px); height:min(58vw, 240px);
-    opacity:0; transform:scale(.15) rotate(-14deg);
-    filter:drop-shadow(0 12px 26px rgba(46,20,27,.5));
-  }
-  .bloom-flower.grow{
-    animation:bloomGrow .78s cubic-bezier(.34,1.35,.4,1) forwards;
-  }
-  .bloom-flower.burst{
-    animation:bloomBurstOut .55s ease-in forwards;
-  }
-  @keyframes bloomGrow{
-    0%{ opacity:0; transform:scale(.15) rotate(-14deg); }
-    60%{ opacity:1; transform:scale(1.14) rotate(4deg); }
-    100%{ opacity:1; transform:scale(1) rotate(0deg); }
-  }
-  @keyframes bloomBurstOut{
-    0%{ opacity:1; transform:scale(1) rotate(0deg); }
-    100%{ opacity:0; transform:scale(1.6) rotate(10deg); }
-  }
-  .burst-petal{
-    position:absolute; top:50%; left:50%; will-change:transform, opacity;
-    transform:translate(-50%,-50%) scale(.5) rotate(0deg);
-    opacity:1;
-  }
-  .burst-petal svg{display:block; width:100%; height:100%;}
+        /* ===== MUSIC TOGGLE ===== */
+        #musicToggle {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 70;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-soft);
+            background: linear-gradient(135deg, var(--ink), var(--ink-deep));
+            color: var(--gold-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(46, 20, 27, .35);
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        #musicToggle svg {
+            width: 22px;
+            height: 22px;
+        }
+        #musicToggle .ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-soft);
+            opacity: 0;
+            animation: musicRing 2.2s ease-out infinite;
+        }
+        #musicToggle.playing .ring {
+            opacity: .55;
+        }
+        @keyframes musicRing {
+            0% {
+                transform: scale(.85);
+                opacity: .55;
+            }
+            100% {
+                transform: scale(1.35);
+                opacity: 0;
+            }
+        }
 
-  @media (prefers-reduced-motion: reduce){
-    .bloom-flower.grow, .bloom-flower.burst{animation:none; opacity:1; transform:none;}
-    .burst-petal{transition:none !important; opacity:0 !important;}
-  }
+        /* ===== MAIN CONTENT ===== */
+        #content {
+            opacity: 0;
+            transition: opacity .8s ease .1s;
+        }
+        #content.visible {
+            opacity: 1;
+        }
 
-  /* ===================== BUNGA 3D DI SISI KIRI/KANAN (mengambang, bisa diklik) ===================== */
-  #fxOverlay{position:fixed; inset:0; z-index:65; pointer-events:none;}
-  .fx-petal{
-    position:fixed; top:0; left:0; will-change:transform, opacity;
-    transform:translate(-50%,-50%) scale(.5) rotate(0deg);
-    opacity:1;
-  }
-  .fx-petal svg{display:block; width:100%; height:100%;}
+        section {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 70px 26px;
+            position: relative;
+        }
+        .section-dark {
+            background: linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%);
+            color: var(--ivory);
+            max-width: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .section-dark>.inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 70px 26px;
+            position: relative;
+        }
+        .section-blush {
+            background: var(--blush);
+            max-width: none;
+        }
+        .section-blush>.inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 70px 26px;
+            position: relative;
+        }
 
-  .side-flower{
-    position:fixed; z-index:6; cursor:pointer; pointer-events:auto;
-    width:clamp(26px, 6.5vw, 56px); height:clamp(26px, 6.5vw, 56px);
-    color:var(--rose);
-    filter:drop-shadow(0 4px 9px rgba(46,20,27,.28));
-    transform-style:preserve-3d;
-    animation:floatSide3d 7s ease-in-out infinite;
-    transition:transform .4s cubic-bezier(.34,1.7,.4,1), filter .3s ease;
-    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
-  }
-  .side-flower svg{display:block; width:100%; height:100%;}
-  .side-flower.left{left:-4px;}
-  .side-flower.right{right:-4px;}
-  .side-flower:hover{filter:drop-shadow(0 6px 14px rgba(46,20,27,.4));}
-  .side-flower.popped{animation:none !important; transform:scale(1.5) rotateY(0deg) !important;}
-  @keyframes floatSide3d{
-    0%{ transform:translateY(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
-    25%{ transform:translateY(-16px) rotateY(120deg) rotateX(14deg) rotateZ(4deg); }
-    50%{ transform:translateY(0) rotateY(220deg) rotateX(-10deg) rotateZ(-4deg); }
-    75%{ transform:translateY(16px) rotateY(300deg) rotateX(10deg) rotateZ(3deg); }
-    100%{ transform:translateY(0) rotateY(360deg) rotateX(0deg) rotateZ(0deg); }
-  }
-  @media (max-width:480px){
-    .side-flower{opacity:.85;}
-    .side-flower.hide-narrow{display:none;}
-  }
-  @media (prefers-reduced-motion: reduce){
-    .side-flower{animation:none;}
-  }
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding-top: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(ellipse at 50% 0%, var(--blush) 0%, transparent 60%);
+        }
+        .hero .eyebrow {
+            color: var(--rose-deep);
+        }
+        .hero .bismillah {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--rose-deep);
+            font-size: 1.05rem;
+            margin-top: 16px;
+        }
+        .hero h1 {
+            font-size: clamp(2.4rem, 9vw, 3.6rem);
+            font-style: italic;
+            margin-top: 20px;
+            line-height: 1.2;
+        }
+        .hero .amp {
+            display: block;
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin: 6px 0;
+        }
+        .hero .to-whom {
+            margin-top: 34px;
+            font-size: .92rem;
+            line-height: 1.9;
+            color: var(--text);
+            max-width: 440px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-  /* ===================== TOMBOL MUSIK ===================== */
-  #musicToggle{
-    position:fixed; right:16px; bottom:16px; z-index:70;
-    width:52px; height:52px; border-radius:50%; border:1px solid var(--gold-soft);
-    background:linear-gradient(135deg, var(--ink), var(--ink-deep));
-    color:var(--gold-soft); display:flex; align-items:center; justify-content:center;
-    cursor:pointer; box-shadow:0 6px 18px rgba(46,20,27,.35);
-    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
-  }
-  #musicToggle svg{width:22px; height:22px;}
-  #musicToggle .ring{
-    position:absolute; inset:-6px; border-radius:50%; border:1px solid var(--gold-soft);
-    opacity:0; animation:musicRing 2.2s ease-out infinite;
-  }
-  #musicToggle.playing .ring{opacity:.55;}
-  @keyframes musicRing{
-    0%{ transform:scale(.85); opacity:.55; }
-    100%{ transform:scale(1.35); opacity:0; }
-  }
+        /* ===== SECTION FLOWERS (unique per section, decorative) ===== */
+        .section-flower {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .18;
+        }
+        .section-flower svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .section-flower-lg {
+            width: min(40vw, 260px);
+            height: auto;
+        }
+        .section-flower-md {
+            width: min(28vw, 180px);
+            height: auto;
+        }
+        .section-flower-sm {
+            width: min(18vw, 110px);
+            height: auto;
+        }
 
-  /* ===================== MAIN CONTENT ===================== */
-  #content{opacity:0; transition:opacity .8s ease .1s;}
-  #content.visible{opacity:1;}
+        /* flower positions */
+        .sf-hero {
+            top: -10px;
+            right: -30px;
+            color: var(--rose);
+            opacity: .13;
+        }
+        .sf-quote {
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            opacity: .5;
+            width: 90px;
+        }
+        .sf-mempelai-l {
+            bottom: -20px;
+            left: -40px;
+            color: var(--rose-deep);
+            opacity: .12;
+        }
+        .sf-mempelai-r {
+            bottom: -20px;
+            right: -40px;
+            color: var(--rose-deep);
+            opacity: .12;
+        }
+        .sf-verse {
+            bottom: -10px;
+            right: -20px;
+            color: var(--sage);
+            opacity: .18;
+        }
+        .sf-acara {
+            top: -20px;
+            right: -30px;
+            color: var(--gold-soft);
+            opacity: .13;
+        }
+        .sf-lokasi {
+            top: -10px;
+            left: -30px;
+            color: var(--sage-deep);
+            opacity: .14;
+        }
+        .sf-hadiah {
+            top: -20px;
+            right: -30px;
+            color: var(--rose);
+            opacity: .12;
+        }
+        .sf-penutup {
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            opacity: .16;
+        }
 
-  section{max-width:var(--container); margin:0 auto; padding:70px 26px; position:relative;}
-  .section-dark{background:linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%); color:var(--ivory); max-width:none; position:relative; overflow:hidden;}
-  .section-dark > .inner{max-width:var(--container); margin:0 auto; padding:70px 26px; position:relative;}
-  .section-blush{background:var(--blush); max-width:none;}
-  .section-blush > .inner{max-width:var(--container); margin:0 auto; padding:70px 26px; position:relative;}
+        /* ===== QUOTE ===== */
+        .quote-box {
+            border: 1px solid var(--line);
+            padding: 46px 30px;
+            text-align: center;
+            position: relative;
+        }
+        .quote-arabic {
+            font-size: clamp(1.3rem, 4.5vw, 1.7rem);
+            line-height: 2.2;
+            color: var(--rose-deep);
+            direction: rtl;
+        }
+        .quote-trans {
+            margin-top: 20px;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text);
+        }
+        .quote-source {
+            margin-top: 16px;
+            font-size: .72rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
 
-  /* HERO */
-  .hero{text-align:center; padding-top:90px; position:relative; overflow:hidden;}
-  .hero-bg{
-    position:absolute; inset:0; z-index:-1;
-    background:radial-gradient(ellipse at 50% 0%, var(--blush) 0%, transparent 60%);
-  }
-  .hero-petals{position:absolute; inset:0; z-index:-1; overflow:hidden; opacity:.6; perspective:600px;}
-  .hero .eyebrow{color:var(--rose-deep);}
-  .hero .bismillah{font-family:var(--font-display); font-style:italic; color:var(--rose-deep); font-size:1.05rem; margin-top:16px;}
-  .hero h1{font-size:clamp(2.4rem, 9vw, 3.6rem); font-style:italic; margin-top:20px; line-height:1.2;}
-  .hero .amp{display:block; color:var(--gold); font-size:1.3rem; margin:6px 0;}
-  .hero .to-whom{margin-top:34px; font-size:.92rem; line-height:1.9; color:var(--text); max-width:440px; margin-left:auto; margin-right:auto;}
+        /* ===== MEMPELAI ===== */
+        .mempelai {
+            text-align: center;
+        }
+        .mempelai .eyebrow {
+            color: var(--rose-deep);
+            text-align: center;
+        }
+        .mempelai-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 18px;
+            margin-top: 34px;
+        }
+        .mempelai-amp {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 2rem;
+            color: var(--rose);
+        }
+        .person h3 {
+            font-size: clamp(1.5rem, 6vw, 1.9rem);
+            font-style: italic;
+        }
+        .person .rel {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            color: var(--rose-deep);
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+        .person .parents {
+            margin-top: 14px;
+            font-size: .86rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
 
-  /* QUOTE / AYAT */
-  .quote-box{border:1px solid var(--line); padding:46px 30px; text-align:center; position:relative;}
-  .quote-arabic{font-size:clamp(1.3rem, 4.5vw, 1.7rem); line-height:2.2; color:var(--rose-deep); direction:rtl;}
-  .quote-trans{margin-top:20px; font-family:var(--font-display); font-style:italic; font-size:1.05rem; line-height:1.75; color:var(--text);}
-  .quote-source{margin-top:16px; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold);}
+        /* ===== ACARA ===== */
+        .acara .eyebrow {
+            text-align: center;
+            color: var(--gold-soft);
+        }
+        .acara h2 {
+            text-align: center;
+            margin-top: 14px;
+            font-style: italic;
+            font-size: clamp(1.7rem, 6vw, 2.2rem);
+            color: var(--ivory);
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 36px 0 42px;
+            flex-wrap: wrap;
+        }
+        .countdown .box {
+            border: 1px solid var(--line);
+            padding: 14px 16px;
+            min-width: 68px;
+            text-align: center;
+        }
+        .countdown .num {
+            font-family: var(--font-display);
+            font-size: 1.7rem;
+            color: var(--gold-soft);
+        }
+        .countdown .lbl {
+            font-size: .62rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: #D9B9C0;
+            margin-top: 4px;
+        }
+        .event-cards {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+        }
+        .event-card {
+            border: 1px solid var(--line);
+            padding: 28px 20px;
+            text-align: center;
+        }
+        .event-card .name {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.35rem;
+            margin-bottom: 12px;
+            color: var(--gold-soft);
+        }
+        .event-card p {
+            font-size: .85rem;
+            line-height: 1.8;
+            color: #EBD9D6;
+        }
+        .event-card .day {
+            color: var(--gold-soft);
+            font-weight: 500;
+        }
 
-  /* MEMPELAI */
-  .mempelai{text-align:center;}
-  .mempelai .eyebrow{color:var(--rose-deep); text-align:center;}
-  .mempelai-grid{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:18px; margin-top:34px;}
-  .mempelai-amp{font-family:var(--font-display); font-style:italic; font-size:2rem; color:var(--rose);}
-  .person h3{font-size:clamp(1.5rem,6vw,1.9rem); font-style:italic;}
-  .person .rel{font-size:.72rem; letter-spacing:.1em; color:var(--rose-deep); margin-top:6px; text-transform:uppercase;}
-  .person .parents{margin-top:14px; font-size:.86rem; color:var(--text); line-height:1.7;}
+        /* ===== LOKASI ===== */
+        .lokasi {
+            text-align: center;
+        }
+        .lokasi .eyebrow {
+            color: var(--rose-deep);
+            text-align: center;
+        }
+        .lokasi h2 {
+            margin-top: 14px;
+            font-style: italic;
+            font-size: clamp(1.7rem, 6vw, 2.1rem);
+        }
+        .lokasi address {
+            font-style: normal;
+            margin-top: 18px;
+            font-size: .92rem;
+            line-height: 1.9;
+            color: var(--text);
+        }
+        .btn-outline {
+            margin-top: 26px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid var(--rose-deep);
+            color: var(--rose-deep);
+            background: transparent;
+            padding: 12px 26px;
+            font-family: var(--font-body);
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            font-size: .7rem;
+            cursor: pointer;
+            transition: background .25s ease, color .25s ease;
+            text-decoration: none;
+        }
+        .btn-outline:hover {
+            background: var(--rose-deep);
+            color: var(--ivory);
+        }
 
-  /* ACARA */
-  .acara .eyebrow{text-align:center; color:var(--gold-soft);}
-  .acara h2{text-align:center; margin-top:14px; font-style:italic; font-size:clamp(1.7rem,6vw,2.2rem);}
-  .countdown{display:flex; justify-content:center; gap:12px; margin:36px 0 42px; flex-wrap:wrap;}
-  .countdown .box{border:1px solid var(--line); padding:14px 16px; min-width:68px; text-align:center;}
-  .countdown .num{font-family:var(--font-display); font-size:1.7rem; color:var(--gold-soft);}
-  .countdown .lbl{font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:#D9B9C0; margin-top:4px;}
+        /* ===== VERSE ===== */
+        .verse {
+            text-align: center;
+        }
+        .verse-text {
+            font-family: var(--font-display);
+            font-style: italic;
+            color: var(--rose-deep);
+            font-size: clamp(1.05rem, 4vw, 1.3rem);
+            line-height: 2;
+            max-width: 400px;
+            margin: 0 auto;
+        }
 
-  .event-cards{display:grid; gap:20px; grid-template-columns:1fr 1fr;}
-  .event-card{border:1px solid var(--line); padding:28px 20px; text-align:center;}
-  .event-card .name{font-family:var(--font-display); font-style:italic; font-size:1.35rem; margin-bottom:12px; color:var(--gold-soft);}
-  .event-card p{font-size:.85rem; line-height:1.8; color:#EBD9D6;}
-  .event-card .day{color:var(--gold-soft); font-weight:500;}
+        /* ===== HADIAH ===== */
+        .hadiah .eyebrow {
+            color: var(--gold-soft);
+            text-align: center;
+        }
+        .hadiah h2 {
+            text-align: center;
+            margin-top: 14px;
+            font-style: italic;
+            font-size: clamp(1.7rem, 6vw, 2.1rem);
+            color: var(--ivory);
+        }
+        .hadiah .sub {
+            text-align: center;
+            margin-top: 12px;
+            font-size: .86rem;
+            color: #EBD9D6;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        .gift-cards {
+            display: grid;
+            gap: 16px;
+            margin-top: 34px;
+        }
+        .gift-card {
+            border: 1px solid var(--line);
+            padding: 22px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .gift-card .bank {
+            font-size: .68rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gold-soft);
+        }
+        .gift-card .num {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-top: 4px;
+            color: var(--ivory);
+        }
+        .gift-card .holder {
+            font-size: .78rem;
+            color: #D9B9C0;
+            margin-top: 4px;
+        }
+        .btn-copy {
+            border: 1px solid var(--gold-soft);
+            color: var(--gold-soft);
+            background: transparent;
+            padding: 9px 18px;
+            font-size: .68rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .25s ease, color .25s ease;
+        }
+        .btn-copy:hover {
+            background: var(--gold-soft);
+            color: var(--ink);
+        }
+        .btn-copy.copied {
+            background: var(--gold-soft);
+            color: var(--ink);
+        }
 
-  /* LOKASI */
-  .lokasi{text-align:center;}
-  .lokasi .eyebrow{color:var(--rose-deep); text-align:center;}
-  .lokasi h2{margin-top:14px; font-style:italic; font-size:clamp(1.7rem,6vw,2.1rem);}
-  .lokasi address{font-style:normal; margin-top:18px; font-size:.92rem; line-height:1.9; color:var(--text);}
-  .btn-outline{
-    margin-top:26px; display:inline-flex; align-items:center; gap:8px;
-    border:1px solid var(--rose-deep); color:var(--rose-deep); background:transparent;
-    padding:12px 26px; font-family:var(--font-body); letter-spacing:.16em; text-transform:uppercase;
-    font-size:.7rem; cursor:pointer; transition:background .25s ease, color .25s ease;
-    text-decoration:none;
-  }
-  .btn-outline:hover{background:var(--rose-deep); color:var(--ivory);}
+        /* ===== PENUTUP (final section) ===== */
+        .penutup {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .penutup .quote-trans {
+            max-width: 420px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .penutup .families {
+            margin-top: 34px;
+            font-size: .9rem;
+            line-height: 2;
+            color: var(--text);
+            position: relative;
+            z-index: 2;
+        }
+        .penutup h2 {
+            margin-top: 22px;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: clamp(1.9rem, 7vw, 2.4rem);
+            color: var(--rose-deep);
+            position: relative;
+            z-index: 2;
+        }
+        .penutup p {
+            position: relative;
+            z-index: 2;
+        }
 
-  /* ===================== ROSE WATERMARKS ===================== */
-  .rose-mark{position:absolute; pointer-events:none;}
-  .rose-mark-cover{
-    width:280px; height:auto; right:-70px; bottom:-40px; color:var(--rose);
-    opacity:.22; transform:rotate(-12deg); z-index:0;
-  }
-  .rose-mark-hero-l{
-    width:190px; height:auto; left:-60px; top:40px; color:var(--rose);
-    opacity:.14; transform:rotate(18deg); z-index:0;
-  }
-  .rose-mark-hero-r{
-    width:150px; height:auto; right:-50px; top:120px; color:var(--gold);
-    opacity:.16; transform:rotate(-24deg) scaleX(-1); z-index:0;
-  }
-  .rose-mark-quote{
-    width:90px; height:auto; left:50%; top:-30px; transform:translateX(-50%);
-    color:var(--gold); opacity:.9; z-index:1;
-  }
-  .rose-mark-mempelai{
-    width:56px; height:auto; color:var(--rose); opacity:.95; margin:0 auto 4px;
-    display:block;
-  }
-  .rose-mark-dark{
-    width:220px; height:auto; color:var(--gold-soft); opacity:.15; z-index:0;
-  }
-  .rose-mark-acara{right:-50px; top:-30px; transform:rotate(10deg);}
-  .rose-mark-hadiah{left:-60px; bottom:-40px; transform:rotate(-16deg) scaleX(-1);}
+        footer {
+            text-align: center;
+            padding: 30px 20px 44px;
+            font-size: .68rem;
+            letter-spacing: .12em;
+            color: var(--rose);
+            text-transform: uppercase;
+        }
 
-  /* ===================== VERSE (pantun cinta) ===================== */
-  .verse{text-align:center;}
-  .verse-text{
-    font-family:var(--font-display); font-style:italic; color:var(--rose-deep);
-    font-size:clamp(1.05rem,4vw,1.3rem); line-height:2; max-width:400px; margin:0 auto;
-  }
-
-  .hadiah .eyebrow{color:var(--gold-soft); text-align:center;}
-  .hadiah h2{text-align:center; margin-top:14px; font-style:italic; font-size:clamp(1.7rem,6vw,2.1rem);}
-  .hadiah .sub{text-align:center; margin-top:12px; font-size:.86rem; color:#EBD9D6; max-width:420px; margin-left:auto; margin-right:auto; line-height:1.8;}
-  .gift-cards{display:grid; gap:16px; margin-top:34px;}
-  .gift-card{border:1px solid var(--line); padding:22px 20px; display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;}
-  .gift-card .bank{font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft);}
-  .gift-card .num{font-family:var(--font-display); font-size:1.3rem; margin-top:4px; color:var(--ivory);}
-  .gift-card .holder{font-size:.78rem; color:#D9B9C0; margin-top:4px;}
-  .btn-copy{
-    border:1px solid var(--gold-soft); color:var(--gold-soft); background:transparent;
-    padding:9px 18px; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
-    cursor:pointer; transition:background .25s ease, color .25s ease;
-  }
-  .btn-copy:hover{background:var(--gold-soft); color:var(--ink);}
-  .btn-copy.copied{background:var(--gold-soft); color:var(--ink);}
-
-  /* PENUTUP */
-  .penutup{text-align:center;}
-  .penutup .quote-trans{max-width:420px; margin:0 auto;}
-  .penutup .families{margin-top:34px; font-size:.9rem; line-height:2; color:var(--text);}
-  .penutup h2{margin-top:22px; font-family:var(--font-display); font-style:italic; font-size:clamp(1.9rem,7vw,2.4rem); color:var(--rose-deep);}
-
-  footer{text-align:center; padding:30px 20px 44px; font-size:.68rem; letter-spacing:.12em; color:var(--rose); text-transform:uppercase;}
-
-  @media (max-width:560px){
-    .event-cards{grid-template-columns:1fr;}
-    .mempelai-grid{grid-template-columns:1fr; gap:10px;}
-    .mempelai-amp{transform:rotate(90deg); margin:6px 0;}
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation-duration:.01ms !important; transition-duration:.01ms !important;}
-    html{scroll-behavior:auto;}
-  }
-</style>
+        @media (max-width: 560px) {
+            .event-cards {
+                grid-template-columns: 1fr;
+            }
+            .mempelai-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .mempelai-amp {
+                transform: rotate(90deg);
+                margin: 6px 0;
+            }
+            .cover-flower {
+                width: min(100vw, 320px);
+                opacity: .15;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: .01ms !important;
+                transition-duration: .01ms !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
 </head>
 <body class="locked">
 
-<!-- ===================== REUSABLE ROSE ARTWORK ===================== -->
-<svg style="position:absolute; width:0; height:0; overflow:hidden;" aria-hidden="true">
-  <defs>
-    <symbol id="roseBloom" viewBox="0 0 120 170">
-      <!-- stem -->
-      <path d="M60,168 C60,140 60,110 60,90" stroke="currentColor" stroke-width="2" fill="none" opacity="0.9"/>
-      <!-- leaves -->
-      <path d="M60,132 C76,126 88,136 80,150 C69,146 60,138 60,132 Z" fill="currentColor" opacity="0.55"/>
-      <path d="M60,144 C44,138 32,148 40,162 C51,158 60,150 60,144 Z" fill="currentColor" opacity="0.55"/>
-      <!-- bloom: six rotated petals around (60,72) -->
-      <g opacity="0.9">
-        <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85"/>
-        <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85" transform="rotate(60 60 74)"/>
-        <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.7" transform="rotate(120 60 74)"/>
-        <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85" transform="rotate(180 60 74)"/>
-        <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.7" transform="rotate(240 60 74)"/>
-        <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85" transform="rotate(300 60 74)"/>
-      </g>
-      <circle cx="60" cy="72" r="7" fill="currentColor"/>
-    </symbol>
+    <!-- ===== REUSABLE ROSE SYMBOLS ===== -->
+    <svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+        <defs>
+            <symbol id="roseBloom" viewBox="0 0 120 170">
+                <path d="M60,168 C60,140 60,110 60,90" stroke="currentColor" stroke-width="2" fill="none" opacity="0.9"/>
+                <path d="M60,132 C76,126 88,136 80,150 C69,146 60,138 60,132 Z" fill="currentColor" opacity="0.55"/>
+                <path d="M60,144 C44,138 32,148 40,162 C51,158 60,150 60,144 Z" fill="currentColor" opacity="0.55"/>
+                <g opacity="0.9">
+                    <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85"/>
+                    <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85" transform="rotate(60 60 74)"/>
+                    <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.7" transform="rotate(120 60 74)"/>
+                    <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85" transform="rotate(180 60 74)"/>
+                    <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.7" transform="rotate(240 60 74)"/>
+                    <path d="M60,74 C48,62 48,37 60,20 C72,37 72,62 60,74 Z" fill="currentColor" opacity="0.85" transform="rotate(300 60 74)"/>
+                </g>
+                <circle cx="60" cy="72" r="7" fill="currentColor"/>
+            </symbol>
+            <linearGradient id="petalGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%" stop-color="#8B4A5C"/>
+                <stop offset="55%" stop-color="#C97B90"/>
+                <stop offset="100%" stop-color="#F7E3E2"/>
+            </linearGradient>
+            <symbol id="bigBloom" viewBox="0 0 200 200">
+                <path id="bloomPetalPath" d="M100,102 C82,86 78,46 100,12 C122,46 118,86 100,102 Z" fill="url(#petalGrad)" stroke="#8B4A5C" stroke-width="0.6" opacity="0.96"/>
+                <use href="#bloomPetalPath" transform="rotate(45 100 100)"/>
+                <use href="#bloomPetalPath" transform="rotate(90 100 100)"/>
+                <use href="#bloomPetalPath" transform="rotate(135 100 100)"/>
+                <use href="#bloomPetalPath" transform="rotate(180 100 100)"/>
+                <use href="#bloomPetalPath" transform="rotate(225 100 100)"/>
+                <use href="#bloomPetalPath" transform="rotate(270 100 100)"/>
+                <use href="#bloomPetalPath" transform="rotate(315 100 100)"/>
+                <circle cx="100" cy="100" r="15" fill="#CBA35C"/>
+                <circle cx="100" cy="100" r="15" fill="none" stroke="#8B4A5C" stroke-width="0.8"/>
+            </symbol>
+        </defs>
+    </svg>
 
-    <linearGradient id="petalGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-      <stop offset="0%" stop-color="#8B4A5C"/>
-      <stop offset="55%" stop-color="#C97B90"/>
-      <stop offset="100%" stop-color="#F7E3E2"/>
-    </linearGradient>
-
-    <symbol id="bigBloom" viewBox="0 0 200 200">
-      <path id="bloomPetalPath" d="M100,102 C82,86 78,46 100,12 C122,46 118,86 100,102 Z" fill="url(#petalGrad)" stroke="#8B4A5C" stroke-width="0.6" opacity="0.96"/>
-      <use href="#bloomPetalPath" transform="rotate(45 100 100)"/>
-      <use href="#bloomPetalPath" transform="rotate(90 100 100)"/>
-      <use href="#bloomPetalPath" transform="rotate(135 100 100)"/>
-      <use href="#bloomPetalPath" transform="rotate(180 100 100)"/>
-      <use href="#bloomPetalPath" transform="rotate(225 100 100)"/>
-      <use href="#bloomPetalPath" transform="rotate(270 100 100)"/>
-      <use href="#bloomPetalPath" transform="rotate(315 100 100)"/>
-      <circle cx="100" cy="100" r="15" fill="#CBA35C"/>
-      <circle cx="100" cy="100" r="15" fill="none" stroke="#8B4A5C" stroke-width="0.8"/>
-    </symbol>
-  </defs>
-</svg>
-
-<!-- ===================== COVER ===================== -->
-<div id="cover">
-  <div class="petals" id="petalsHolder"></div>
-  <svg class="rose-mark rose-mark-cover" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-  <div class="cover-inner">
-    <div class="corner-frame">
-      <!-- simple line-art floral sprig corners -->
-      <svg class="tl" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
-      <svg class="tr" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
-      <svg class="bl" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
-      <svg class="br" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
-    </div>
-    <p class="eyebrow">The Wedding Of</p>
-    <h1 class="cover-names">[Nama Wanita]<span class="cover-amp">&amp;</span>[Nama Pria]</h1>
-    <p class="cover-sub" id="cover-date">Sabtu, 12 Juni 2027</p>
-    <p class="cover-to">
-      Kepada Bapak / Ibu / Saudara/i<br>
-      Tamu undangan yang berbahagia
-    </p>
-    <button class="btn-open" id="openBtn" type="button">Buka Undangan ✿</button>
-  </div>
-</div>
-
-<!-- ===================== BUNGA BESAR (animasi buka undangan) ===================== -->
-<div id="bloomOverlay" aria-hidden="true">
-  <svg class="bloom-flower" id="bloomFlower" viewBox="0 0 200 200"><use href="#bigBloom"/></svg>
-</div>
-
-<!-- overlay untuk efek kelopak saat bunga sisi diklik -->
-<div id="fxOverlay" aria-hidden="true"></div>
-
-<!-- ===================== BUNGA 3D DI SISI KIRI & KANAN (mengambang, bisa diklik) ===================== -->
-<div class="side-flower left" data-size="1" style="top:8%; animation-duration:8.2s; animation-delay:.2s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower left" data-size="2" style="top:26%; animation-duration:6.4s; animation-delay:1.1s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower left hide-narrow" data-size="3" style="top:46%; animation-duration:9s; animation-delay:.6s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower left" data-size="2" style="top:65%; animation-duration:7.1s; animation-delay:1.6s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower left hide-narrow" data-size="1" style="top:85%; animation-duration:8.6s; animation-delay:.4s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-
-<div class="side-flower right" data-size="2" style="top:14%; animation-duration:7.6s; animation-delay:.8s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower right hide-narrow" data-size="1" style="top:34%; animation-duration:6.8s; animation-delay:1.4s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower right" data-size="3" style="top:55%; animation-duration:9.4s; animation-delay:.3s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower right" data-size="2" style="top:74%; animation-duration:7.3s; animation-delay:1.2s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-<div class="side-flower right hide-narrow" data-size="1" style="top:92%; animation-duration:8.9s; animation-delay:.7s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
-
-<!-- ===================== MUSIK LATAR ===================== -->
-<!-- CATATAN: ganti "musik-bernaung-feby-putri.mp3" dengan file lagu berlisensi milik Anda,
-     letakkan di folder yang sama dengan file index.html ini -->
-<audio id="bgMusic" loop preload="none">
-  <source src="musik-bernaung-feby-putri.mp3" type="audio/mpeg">
-</audio>
-<button id="musicToggle" type="button" aria-label="Putar / jeda musik">
-  <span class="ring"></span>
-  <svg id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display:none;">
-    <path d="M9 18V5l10-2v13" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>
-  </svg>
-  <svg id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-    <path d="M9 18V5l10-2v13" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>
-    <path d="M3 3l18 18" stroke-linecap="round"/>
-  </svg>
-</button>
-
-<!-- ===================== MAIN CONTENT ===================== -->
-<main id="content">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-petals" id="heroPetals"></div>
-    <svg class="rose-mark rose-mark-hero-l" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-    <svg class="rose-mark rose-mark-hero-r" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-    <p class="eyebrow">Bismillahirrahmanirrahim</p>
-    <p class="bismillah">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
-    <h1>
-      [Nama Mempelai Wanita]
-      <span class="amp">&amp;</span>
-      [Nama Mempelai Pria]
-    </h1>
-    <p class="to-whom">
-      Dengan penuh syukur ke hadirat Tuhan Yang Maha Esa, kami bermaksud
-      menyelenggarakan pernikahan kami. Tanpa mengurangi rasa hormat, izinkan
-      kami mengundang Bapak/Ibu/Saudara/i untuk turut hadir dan memberikan
-      doa restu bagi kami berdua.
-    </p>
-  </section>
-
-  <div class="divider">
-    <span class="rule"></span>
-    <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
-    <span class="rule"></span>
-  </div>
-
-  <!-- QUOTE -->
-  <section class="quote">
-    <div class="quote-box">
-      <svg class="rose-mark rose-mark-quote" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-      <p class="quote-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوٓا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-      <p class="quote-trans">
-        "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
-        pasangan untukmu dari jenismu sendiri, agar kamu merasa tenteram
-        kepadanya. Dan Dia jadikan di antaramu rasa kasih dan sayang."
-      </p>
-      <p class="quote-source">Q.S. Ar-Rum : 21</p>
-    </div>
-  </section>
-
-  <div class="divider">
-    <span class="rule"></span>
-    <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
-    <span class="rule"></span>
-  </div>
-
-  <!-- MEMPELAI -->
-  <section class="mempelai">
-    <svg class="rose-mark-mempelai" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-    <p class="eyebrow">Kedua Mempelai</p>
-    <div class="mempelai-grid">
-      <div class="person">
-        <h3>[Nama Lengkap Wanita]</h3>
-        <p class="rel">Putri</p>
-        <p class="parents">
-          Putri dari<br>
-          Bapak [Nama Ayah Wanita] &amp;<br>
-          Ibu [Nama Ibu Wanita]
-        </p>
-      </div>
-      <div class="mempelai-amp">&amp;</div>
-      <div class="person">
-        <h3>[Nama Lengkap Pria]</h3>
-        <p class="rel">Putra</p>
-        <p class="parents">
-          Putra dari<br>
-          Bapak [Nama Ayah Pria] &amp;<br>
-          Ibu [Nama Ibu Pria]
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider">
-    <span class="rule"></span>
-    <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
-    <span class="rule"></span>
-  </div>
-
-  <!-- VERSE -->
-  <section class="verse">
-    <p class="verse-text">
-      Dua hati yang saling menemukan,<br>
-      tumbuh bersama dalam doa dan kesabaran,<br>
-      hingga cinta ini abadi sepanjang perjalanan.
-    </p>
-  </section>
-
-  <!-- ACARA (dark rosewood) -->
-  <section class="section-dark">
-    <svg class="rose-mark rose-mark-dark rose-mark-acara" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-    <div class="inner">
-      <p class="eyebrow" style="text-align:center; color:var(--gold-soft);">Save The Date</p>
-      <h2 style="text-align:center; margin-top:14px; font-style:italic; font-size:clamp(1.7rem,6vw,2.2rem); color:var(--ivory);">Hari Bahagia Kami</h2>
-
-      <div class="countdown" id="countdown">
-        <div class="box"><div class="num" id="cd-days">00</div><div class="lbl">Hari</div></div>
-        <div class="box"><div class="num" id="cd-hours">00</div><div class="lbl">Jam</div></div>
-        <div class="box"><div class="num" id="cd-mins">00</div><div class="lbl">Menit</div></div>
-        <div class="box"><div class="num" id="cd-secs">00</div><div class="lbl">Detik</div></div>
-      </div>
-
-      <div class="event-cards">
-        <div class="event-card">
-          <p class="name">Akad Nikah</p>
-          <p><span class="day">Sabtu, 12 Juni 2027</span><br>08.00 — 10.00 WIB<br>[Nama Tempat Akad]</p>
+    <!-- ===== COVER ===== -->
+    <div id="cover">
+        <!-- big subtle flower behind cover -->
+        <svg class="cover-flower" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+        <div class="cover-inner">
+            <div class="corner-frame">
+                <svg class="tl" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
+                <svg class="tr" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
+                <svg class="bl" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
+                <svg class="br" viewBox="0 0 70 70"><path d="M4 4 Q4 30 4 40 M4 4 Q30 4 40 4" stroke="#E3C892" stroke-width="1" fill="none"/><path d="M4 4 C14 10 18 18 14 26" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="15" cy="26" r="2.2" fill="#C97B90"/><path d="M4 4 C10 14 18 18 26 14" stroke="#C97B90" stroke-width="1.1" fill="none"/><circle cx="26" cy="14" r="2.2" fill="#C97B90"/></svg>
+            </div>
+            <p class="eyebrow">The Wedding Of</p>
+            <h1 class="cover-names">[Nama Wanita]<span class="cover-amp">&amp;</span>[Nama Pria]</h1>
+            <p class="cover-sub" id="cover-date">Sabtu, 12 Juni 2027</p>
+            <p class="cover-to">
+                Kepada Bapak / Ibu / Saudara/i<br />
+                Tamu undangan yang berbahagia
+            </p>
+            <button class="btn-open" id="openBtn" type="button">Buka Undangan ✿</button>
         </div>
-        <div class="event-card">
-          <p class="name">Resepsi</p>
-          <p><span class="day">Sabtu, 12 Juni 2027</span><br>11.00 — 14.00 WIB<br>[Nama Gedung / Rumah]</p>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- LOKASI -->
-  <section class="lokasi">
-    <p class="eyebrow">Lokasi Acara</p>
-    <h2>[Nama Gedung / Rumah]</h2>
-    <address>
-      [Alamat Lengkap, Nomor, RT/RW]<br>
-      [Kelurahan, Kecamatan]<br>
-      [Kota, Provinsi, Kode Pos]
-    </address>
-    <a class="btn-outline" href="#" id="mapBtn" target="_blank" rel="noopener">Buka di Google Maps ↗</a>
-  </section>
-
-  <div class="divider">
-    <span class="rule"></span>
-    <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
-    <span class="rule"></span>
-  </div>
-
-  <!-- HADIAH (dark rosewood) -->
-  <section class="section-dark">
-    <svg class="rose-mark rose-mark-dark rose-mark-hadiah" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-    <div class="inner">
-      <p class="eyebrow">Tanda Kasih</p>
-      <h2 style="color:var(--ivory);">Kirim Hadiah</h2>
-      <p class="sub">
-        Kehadiran dan doa restu Bapak/Ibu/Saudara/i adalah hadiah terindah
-        bagi kami. Namun jika ingin memberi tanda kasih, dapat melalui:
-      </p>
-      <div class="gift-cards">
-        <div class="gift-card">
-          <div>
-            <p class="bank">Bank [Nama Bank]</p>
-            <p class="num">[0000 0000 0000]</p>
-            <p class="holder">a.n. [Nama Pemilik Rekening]</p>
-          </div>
-          <button class="btn-copy" data-copy="[0000 0000 0000]">Salin</button>
-        </div>
-        <div class="gift-card">
-          <div>
-            <p class="bank">Alamat Kado</p>
-            <p class="num" style="font-size:.95rem; font-family:var(--font-body);">[Alamat pengiriman kado]</p>
-            <p class="holder">a.n. [Nama Penerima]</p>
-          </div>
-          <button class="btn-copy" data-copy="[Alamat pengiriman kado]">Salin</button>
-        </div>
-      </div>
+    <!-- ===== BLOOM OVERLAY ===== -->
+    <div id="bloomOverlay" aria-hidden="true">
+        <svg class="bloom-flower" id="bloomFlower" viewBox="0 0 200 200"><use href="#bigBloom"/></svg>
     </div>
-  </section>
+    <div id="fxOverlay" aria-hidden="true"></div>
 
-  <!-- PENUTUP -->
-  <section class="penutup">
-    <p class="quote-trans">
-      "Terima kasih atas doa restu, kasih sayang, serta kehadiran
-      Bapak/Ibu/Saudara/i yang menjadi kebahagiaan tersendiri bagi kami."
-    </p>
-    <div class="families">
-      Wassalamu'alaikum Warahmatullahi Wabarakatuh<br><br>
-      Hormat kami,
-    </div>
-    <h2>[Nama Wanita] &amp; [Nama Pria]</h2>
-    <p style="margin-top:10px; font-size:.85rem; color:var(--rose);">
-      Beserta keluarga besar kedua mempelai
-    </p>
-  </section>
+    <!-- ===== MUSIC ===== -->
+    <audio id="bgMusic" loop preload="none">
+        <source src="musik-bernaung-feby-putri.mp3" type="audio/mpeg" />
+    </audio>
+    <button id="musicToggle" type="button" aria-label="Putar / jeda musik">
+        <span class="ring"></span>
+        <svg id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display:none;">
+            <path d="M9 18V5l10-2v13" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>
+        </svg>
+        <svg id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M9 18V5l10-2v13" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>
+            <path d="M3 3l18 18" stroke-linecap="round"/>
+        </svg>
+    </button>
 
-  <footer>Dibuat dengan penuh cinta — Undangan Pernikahan Digital</footer>
-</main>
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="content">
 
-<script>
-(function(){
-  "use strict";
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <svg class="section-flower section-flower-lg sf-hero" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <p class="eyebrow">Bismillahirrahmanirrahim</p>
+            <p class="bismillah">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+            <h1>
+                [Nama Mempelai Wanita]
+                <span class="amp">&amp;</span>
+                [Nama Mempelai Pria]
+            </h1>
+            <p class="to-whom">
+                Dengan penuh syukur ke hadirat Tuhan Yang Maha Esa, kami bermaksud
+                menyelenggarakan pernikahan kami. Tanpa mengurangi rasa hormat, izinkan
+                kami mengundang Bapak/Ibu/Saudara/i untuk turut hadir dan memberikan
+                doa restu bagi kami berdua.
+            </p>
+        </section>
 
-  /* ---------- COVER OPEN: bunga besar mekar lalu pecah jadi ribuan kelopak ---------- */
-  var cover = document.getElementById('cover');
-  var content = document.getElementById('content');
-  var openBtn = document.getElementById('openBtn');
-  var bloomOverlay = document.getElementById('bloomOverlay');
-  var bloomFlower = document.getElementById('bloomFlower');
-  var bloomTriggered = false;
+        <div class="divider">
+            <span class="rule"></span>
+            <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
+            <span class="rule"></span>
+        </div>
 
-  function openBloom(e){
-    if (bloomTriggered) return;
-    bloomTriggered = true;
-    if (e && e.preventDefault) e.preventDefault();
+        <!-- QUOTE -->
+        <section class="quote">
+            <svg class="section-flower section-flower-sm sf-quote" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <div class="quote-box">
+                <p class="quote-arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوٓا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+                <p class="quote-trans">
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
+                    pasangan untukmu dari jenismu sendiri, agar kamu merasa tenteram
+                    kepadanya. Dan Dia jadikan di antaramu rasa kasih dan sayang."
+                </p>
+                <p class="quote-source">Q.S. Ar-Rum : 21</p>
+            </div>
+        </section>
 
-    openBtn.setAttribute('disabled', 'disabled');
-    openBtn.style.opacity = '0';
+        <div class="divider">
+            <span class="rule"></span>
+            <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
+            <span class="rule"></span>
+        </div>
 
-    /* 1) bunga besar muncul & mekar di tengah layar */
-    bloomFlower.classList.add('grow');
+        <!-- MEMPELAI -->
+        <section class="mempelai">
+            <svg class="section-flower section-flower-md sf-mempelai-l" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <svg class="section-flower section-flower-md sf-mempelai-r" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <p class="eyebrow">Kedua Mempelai</p>
+            <div class="mempelai-grid">
+                <div class="person">
+                    <h3>[Nama Lengkap Wanita]</h3>
+                    <p class="rel">Putri</p>
+                    <p class="parents">
+                        Putri dari<br />
+                        Bapak [Nama Ayah Wanita] &amp;<br />
+                        Ibu [Nama Ibu Wanita]
+                    </p>
+                </div>
+                <div class="mempelai-amp">&amp;</div>
+                <div class="person">
+                    <h3>[Nama Lengkap Pria]</h3>
+                    <p class="rel">Putra</p>
+                    <p class="parents">
+                        Putra dari<br />
+                        Bapak [Nama Ayah Pria] &amp;<br />
+                        Ibu [Nama Ibu Pria]
+                    </p>
+                </div>
+            </div>
+        </section>
 
-    /* 2) setelah mekar, bunga pecah jadi ribuan kelopak + undangan terbuka */
-    setTimeout(function(){
-      bloomFlower.classList.remove('grow');
-      bloomFlower.classList.add('burst');
-      spawnBurstPetals(220);
+        <div class="divider">
+            <span class="rule"></span>
+            <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
+            <span class="rule"></span>
+        </div>
 
-      cover.classList.add('opened');
-      document.body.classList.remove('locked');
-      content.classList.add('visible');
-    }, 720);
+        <!-- VERSE -->
+        <section class="verse">
+            <svg class="section-flower section-flower-sm sf-verse" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <p class="verse-text">
+                Dua hati yang saling menemukan,<br />
+                tumbuh bersama dalam doa dan kesabaran,<br />
+                hingga cinta ini abadi sepanjang perjalanan.
+            </p>
+        </section>
 
-    /* 3) bersihkan overlay setelah kelopak selesai beterbangan */
-    setTimeout(function(){
-      bloomOverlay.innerHTML = '';
-      bloomOverlay.style.display = 'none';
-    }, 2500);
+        <!-- ACARA (dark) -->
+        <section class="section-dark">
+            <svg class="section-flower section-flower-lg sf-acara" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <div class="inner">
+                <p class="eyebrow" style="text-align:center;color:var(--gold-soft);">Save The Date</p>
+                <h2 style="text-align:center;margin-top:14px;font-style:italic;font-size:clamp(1.7rem,6vw,2.2rem);color:var(--ivory);">Hari Bahagia Kami</h2>
 
-    /* musik latar mulai bersamaan dengan bunga mekar (dipicu oleh gestur klik pengguna) */
-    playMusic();
-  }
+                <div class="countdown" id="countdown">
+                    <div class="box"><div class="num" id="cd-days">00</div><div class="lbl">Hari</div></div>
+                    <div class="box"><div class="num" id="cd-hours">00</div><div class="lbl">Jam</div></div>
+                    <div class="box"><div class="num" id="cd-mins">00</div><div class="lbl">Menit</div></div>
+                    <div class="box"><div class="num" id="cd-secs">00</div><div class="lbl">Detik</div></div>
+                </div>
 
-  openBtn.addEventListener('click', openBloom);
-  openBtn.addEventListener('touchend', openBloom, {passive:false});
+                <div class="event-cards">
+                    <div class="event-card">
+                        <p class="name">Akad Nikah</p>
+                        <p><span class="day">Sabtu, 12 Juni 2027</span><br />08.00 — 10.00 WIB<br />[Nama Tempat Akad]</p>
+                    </div>
+                    <div class="event-card">
+                        <p class="name">Resepsi</p>
+                        <p><span class="day">Sabtu, 12 Juni 2027</span><br />11.00 — 14.00 WIB<br />[Nama Gedung / Rumah]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  /* ---------- bunga 3D di sisi kiri/kanan: bisa diklik, memancarkan kelopak ---------- */
-  var fxOverlay = document.getElementById('fxOverlay');
+        <!-- LOKASI -->
+        <section class="lokasi">
+            <svg class="section-flower section-flower-md sf-lokasi" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <p class="eyebrow">Lokasi Acara</p>
+            <h2>[Nama Gedung / Rumah]</h2>
+            <address>
+                [Alamat Lengkap, Nomor, RT/RW]<br />
+                [Kelurahan, Kecamatan]<br />
+                [Kota, Provinsi, Kode Pos]
+            </address>
+            <a class="btn-outline" href="#" id="mapBtn" target="_blank" rel="noopener">Buka di Google Maps ↗</a>
+        </section>
 
-  function spawnMiniBurst(cx, cy, count){
-    var colors = ['#C97B90', '#E3C892', '#F7E3E2', '#8B4A5C', '#9DB08F'];
-    for (var i = 0; i < count; i++){
-      (function(i){
-        var el = document.createElement('span');
-        el.className = 'fx-petal';
-        var size = 8 + Math.random() * 13;
-        el.style.width = size + 'px';
-        el.style.height = size + 'px';
-        el.style.left = cx + 'px';
-        el.style.top = cy + 'px';
-        el.innerHTML = makePetalSVG(colors[i % colors.length]);
-        fxOverlay.appendChild(el);
+        <div class="divider">
+            <span class="rule"></span>
+            <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
+            <span class="rule"></span>
+        </div>
 
-        var angle = Math.random() * Math.PI * 2;
-        var dist = 40 + Math.random() * 130;
-        var dx = Math.cos(angle) * dist;
-        var dy = Math.sin(angle) * dist;
-        var rot = Math.random() * 720 - 360;
-        var scale = 0.4 + Math.random() * 0.8;
-        var dur = 0.7 + Math.random() * 0.6;
-        var delay = Math.random() * 0.1;
+        <!-- HADIAH (dark) -->
+        <section class="section-dark">
+            <svg class="section-flower section-flower-lg sf-hadiah" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <div class="inner">
+                <p class="eyebrow">Tanda Kasih</p>
+                <h2 style="color:var(--ivory);">Kirim Hadiah</h2>
+                <p class="sub">
+                    Kehadiran dan doa restu Bapak/Ibu/Saudara/i adalah hadiah terindah
+                    bagi kami. Namun jika ingin memberi tanda kasih, dapat melalui:
+                </p>
+                <div class="gift-cards">
+                    <div class="gift-card">
+                        <div>
+                            <p class="bank">Bank [Nama Bank]</p>
+                            <p class="num">[0000 0000 0000]</p>
+                            <p class="holder">a.n. [Nama Pemilik Rekening]</p>
+                        </div>
+                        <button class="btn-copy" data-copy="[0000 0000 0000]">Salin</button>
+                    </div>
+                    <div class="gift-card">
+                        <div>
+                            <p class="bank">Alamat Kado</p>
+                            <p class="num" style="font-size:.95rem;font-family:var(--font-body);">[Alamat pengiriman kado]</p>
+                            <p class="holder">a.n. [Nama Penerima]</p>
+                        </div>
+                        <button class="btn-copy" data-copy="[Alamat pengiriman kado]">Salin</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        el.style.transition =
-          'transform ' + dur + 's cubic-bezier(.16,1,.3,1) ' + delay + 's, ' +
-          'opacity ' + dur + 's ease-out ' + delay + 's';
+        <!-- ===== PENUTUP (Final Section with Interactive Flowers) ===== -->
+        <section class="penutup">
+            <!-- Decorative background flower -->
+            <svg class="section-flower section-flower-sm sf-penutup" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
 
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            el.style.transform =
-              'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg) scale(' + scale + ')';
-            el.style.opacity = '0';
-          });
-        });
+            <!-- Interactive Clickable Flowers (Left & Right) -->
+            <div class="side-flower left" style="--dur:8.2s; --delay:.2s;">
+                <div class="side-flower-inner"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+            </div>
+            <div class="side-flower right" style="--dur:7.6s; --delay:.8s;">
+                <div class="side-flower-inner"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+            </div>
 
-        setTimeout(function(){
-          if (el.parentNode) el.parentNode.removeChild(el);
-        }, (dur + delay) * 1000 + 120);
-      })(i);
-    }
-  }
+            <p class="quote-trans">
+                "Terima kasih atas doa restu, kasih sayang, serta kehadiran
+                Bapak/Ibu/Saudara/i yang menjadi kebahagiaan tersendiri bagi kami."
+            </p>
+            <div class="families">
+                Wassalamu'alaikum Warahmatullahi Wabarakatuh<br /><br />
+                Hormat kami,
+            </div>
+            <h2>[Nama Wanita] &amp; [Nama Pria]</h2>
+            <p style="margin-top:10px;font-size:.85rem;color:var(--rose);">
+                Beserta keluarga besar kedua mempelai
+            </p>
+        </section>
 
-  var sideFlowers = document.querySelectorAll('.side-flower');
-  sideFlowers.forEach(function(el){
-    function pop(e){
-      if (e && e.preventDefault) e.preventDefault();
-      var rect = el.getBoundingClientRect();
-      var cx = rect.left + rect.width / 2;
-      var cy = rect.top + rect.height / 2;
-      el.classList.add('popped');
-      spawnMiniBurst(cx, cy, 22);
-      setTimeout(function(){ el.classList.remove('popped'); }, 500);
-    }
-    el.addEventListener('click', pop);
-    el.addEventListener('touchend', pop, {passive:false});
-  });
+        <footer>Frn Project — Undangan Pernikahan Digital</footer>
+    </main>
 
-  /* ---------- musik latar ---------- */
-  var bgMusic = document.getElementById('bgMusic');
-  var musicBtn = document.getElementById('musicToggle');
-  var iconOn = document.getElementById('musicIconOn');
-  var iconOff = document.getElementById('musicIconOff');
+    <script>
+        (function() {
+            "use strict";
 
-  function setMusicIcon(playing){
-    iconOn.style.display = playing ? 'block' : 'none';
-    iconOff.style.display = playing ? 'none' : 'block';
-    musicBtn.classList.toggle('playing', playing);
-  }
+            /* ===== COVER OPEN ===== */
+            var cover = document.getElementById('cover');
+            var content = document.getElementById('content');
+            var openBtn = document.getElementById('openBtn');
+            var bloomOverlay = document.getElementById('bloomOverlay');
+            var bloomFlower = document.getElementById('bloomFlower');
+            var bloomTriggered = false;
 
-  function playMusic(){
-    if (!bgMusic) return;
-    var p = bgMusic.play();
-    if (p && p.catch) { p.then(function(){ setMusicIcon(true); }).catch(function(){ setMusicIcon(false); }); }
-    else { setMusicIcon(true); }
-  }
+            function openBloom(e) {
+                if (bloomTriggered) return;
+                bloomTriggered = true;
+                if (e && e.preventDefault) e.preventDefault();
+                openBtn.setAttribute('disabled', 'disabled');
+                openBtn.style.opacity = '0';
 
-  function toggleMusic(e){
-    if (e && e.preventDefault) e.preventDefault();
-    if (bgMusic.paused){
-      playMusic();
-    } else {
-      bgMusic.pause();
-      setMusicIcon(false);
-    }
-  }
-  musicBtn.addEventListener('click', toggleMusic);
-  musicBtn.addEventListener('touchend', toggleMusic, {passive:false});
+                bloomFlower.classList.add('grow');
 
-  /* ---------- kelopak ledakan dari tengah bunga besar ---------- */
-  function spawnBurstPetals(count){
-    var colors = ['#C97B90', '#E3C892', '#F7E3E2', '#8B4A5C', '#9DB08F'];
-    var maxReach = Math.max(window.innerWidth, window.innerHeight) * 0.68;
+                setTimeout(function() {
+                    bloomFlower.classList.remove('grow');
+                    bloomFlower.classList.add('burst');
+                    spawnBurstPetals(220);
+                    cover.classList.add('opened');
+                    document.body.classList.remove('locked');
+                    content.classList.add('visible');
+                }, 720);
 
-    for (var i = 0; i < count; i++){
-      (function(i){
-        var el = document.createElement('span');
-        el.className = 'burst-petal';
-        var size = 9 + Math.random() * 17;
-        el.style.width = size + 'px';
-        el.style.height = size + 'px';
-        el.innerHTML = makePetalSVG(colors[i % colors.length]);
-        bloomOverlay.appendChild(el);
+                setTimeout(function() {
+                    bloomOverlay.innerHTML = '';
+                    bloomOverlay.style.display = 'none';
+                }, 2500);
 
-        var angle = Math.random() * Math.PI * 2;
-        var dist = 90 + Math.random() * maxReach;
-        var dx = Math.cos(angle) * dist;
-        var dy = Math.sin(angle) * dist;
-        var rot = Math.random() * 900 - 450;
-        var scale = 0.4 + Math.random() * 0.9;
-        var dur = 0.9 + Math.random() * 0.9;
-        var delay = Math.random() * 0.18;
+                playMusic();
+            }
 
-        el.style.transition =
-          'transform ' + dur + 's cubic-bezier(.16,1,.3,1) ' + delay + 's, ' +
-          'opacity ' + dur + 's ease-out ' + delay + 's';
+            openBtn.addEventListener('click', openBloom);
+            openBtn.addEventListener('touchend', openBloom, { passive: false });
 
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            el.style.transform =
-              'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg) scale(' + scale + ')';
-            el.style.opacity = '0';
-          });
-        });
-      })(i);
-    }
-  }
+            /* ===== SIDE FLOWER BURST (now inside .penutup) ===== */
+            var fxOverlay = document.getElementById('fxOverlay');
 
-  /* ---------- floating 3D petals (pure decorative, CSS/JS only — no backend) ---------- */
-  function makePetalSVG(color){
-    return '<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">' +
-      '<path d="M11 1 C16 4 20 8 20 12 C20 17 16 20 11 20 C6 20 2 17 2 12 C2 8 6 4 11 1 Z" ' +
-      'fill="' + color + '" stroke="rgba(255,255,255,0.5)" stroke-width="0.6"/>' +
-      '<path d="M11 3 C11 9 11 14 11 19" stroke="rgba(255,255,255,0.35)" stroke-width="0.6" fill="none"/>' +
-      '</svg>';
-  }
+            function spawnMiniBurst(cx, cy, count) {
+                var colors = ['#C97B90', '#E3C892', '#F7E3E2', '#8B4A5C', '#9DB08F'];
+                for (var i = 0; i < count; i++) {
+                    (function(i) {
+                        var el = document.createElement('span');
+                        el.className = 'fx-petal';
+                        var size = 8 + Math.random() * 13;
+                        el.style.width = size + 'px';
+                        el.style.height = size + 'px';
+                        el.style.left = cx + 'px';
+                        el.style.top = cy + 'px';
+                        el.innerHTML = makePetalSVG(colors[i % colors.length]);
+                        fxOverlay.appendChild(el);
 
-  function spawnPetals(holderId, count, sizeMin, sizeMax, opacityLayer){
-    var holder = document.getElementById(holderId);
-    if (!holder) return;
-    var colors = ['#C97B90', '#E3C892', '#F7E3E2', '#8B4A5C'];
-    var styleRules = [];
+                        var angle = Math.random() * Math.PI * 2;
+                        var dist = 40 + Math.random() * 130;
+                        var dx = Math.cos(angle) * dist;
+                        var dy = Math.sin(angle) * dist;
+                        var rot = Math.random() * 720 - 360;
+                        var scale = 0.4 + Math.random() * 0.8;
+                        var dur = 0.7 + Math.random() * 0.6;
+                        var delay = Math.random() * 0.1;
 
-    for (var i = 0; i < count; i++){
-      var p = document.createElement('span');
-      p.className = 'petal';
-      var size = sizeMin + Math.random() * (sizeMax - sizeMin);
-      var color = colors[i % colors.length];
-      var spinDuration = 4 + Math.random() * 4;
-      var spinClass = 'spin3d-' + (i % 4);
-      p.innerHTML = '<span class="petal-spin" style="animation:' + spinClass + ' ' + spinDuration + 's linear infinite;">' + makePetalSVG(color) + '</span>';
-      p.style.left = (Math.random() * 100) + '%';
-      p.style.width = size + 'px';
-      p.style.height = size + 'px';
-      p.style.opacity = String(opacityLayer * (0.6 + Math.random() * 0.4));
+                        el.style.transition =
+                            'transform ' + dur + 's cubic-bezier(.16,1,.3,1) ' + delay + 's, ' +
+                            'opacity ' + dur + 's ease-out ' + delay + 's';
 
-      var fallDuration = 10 + Math.random() * 12;
-      var swayDuration = 3 + Math.random() * 3;
-      var delay = Math.random() * 10;
-      var animName = 'fall-' + holderId + '-' + i;
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                el.style.transform =
+                                    'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot +
+                                    'deg) scale(' + scale + ')';
+                                el.style.opacity = '0';
+                            });
+                        });
 
-      /* outer element: vertical fall (transform) + horizontal sway (margin-left) —
-         kept on the same element since they animate different CSS properties and
-         don't conflict; 3D rotation lives on the inner .petal-spin element instead. */
-      p.style.animation =
-        animName + ' ' + fallDuration + 's linear ' + delay + 's infinite, ' +
-        'sway-' + (i % 3) + ' ' + swayDuration + 's ease-in-out infinite alternate';
+                        setTimeout(function() {
+                            if (el.parentNode) el.parentNode.removeChild(el);
+                        }, (dur + delay) * 1000 + 120);
+                    })(i);
+                }
+            }
 
-      styleRules.push(
-        '@keyframes ' + animName + '{' +
-          'from{ transform:translateY(-40px); }' +
-          'to{ transform:translateY(112vh); }' +
-        '}'
-      );
+            var sideFlowers = document.querySelectorAll('.penutup .side-flower');
+            sideFlowers.forEach(function(el) {
+                function pop(e) {
+                    if (e && e.preventDefault) e.preventDefault();
+                    var rect = el.getBoundingClientRect();
+                    var cx = rect.left + rect.width / 2;
+                    var cy = rect.top + rect.height / 2;
+                    el.classList.add('popped');
+                    spawnMiniBurst(cx, cy, 22);
+                    setTimeout(function() { el.classList.remove('popped'); }, 500);
+                }
+                el.addEventListener('click', pop);
+                el.addEventListener('touchend', pop, { passive: false });
+            });
 
-      holder.appendChild(p);
-    }
+            /* ===== MUSIC ===== */
+            var bgMusic = document.getElementById('bgMusic');
+            var musicBtn = document.getElementById('musicToggle');
+            var iconOn = document.getElementById('musicIconOn');
+            var iconOff = document.getElementById('musicIconOff');
 
-    /* shared sway (horizontal drift) and 3D spin keyframes, generated once per holder */
-    for (var s = 0; s < 3; s++){
-      var dist = 30 + s * 25;
-      styleRules.push(
-        '@keyframes sway-' + s + '{ from{ margin-left:0px; } to{ margin-left:' + dist + 'px; } }'
-      );
-    }
-    for (var r = 0; r < 4; r++){
-      styleRules.push(
-        '@keyframes spin3d-' + r + '{' +
-          '0%{ transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg); }' +
-          '50%{ transform:rotateY(180deg) rotateX(60deg) rotateZ(90deg); }' +
-          '100%{ transform:rotateY(360deg) rotateX(0deg) rotateZ(180deg); }' +
-        '}'
-      );
-    }
+            function setMusicIcon(playing) {
+                iconOn.style.display = playing ? 'block' : 'none';
+                iconOff.style.display = playing ? 'none' : 'block';
+                musicBtn.classList.toggle('playing', playing);
+            }
 
-    var styleEl = document.createElement('style');
-    styleEl.textContent = styleRules.join(' ') +
-      ' @media (prefers-reduced-motion: reduce){ #' + holderId + '{ display:none; } }';
-    document.head.appendChild(styleEl);
-  }
+            function playMusic() {
+                if (!bgMusic) return;
+                var p = bgMusic.play();
+                if (p && p.catch) {
+                    p.then(function() { setMusicIcon(true); }).catch(function() { setMusicIcon(false); });
+                } else {
+                    setMusicIcon(true);
+                }
+            }
 
-  spawnPetals('petalsHolder', 22, 14, 24, 0.9);   /* cover — lebih besar & rapat */
-  spawnPetals('heroPetals', 10, 12, 20, 0.5);      /* hero — lebih halus, menegaskan nuansa pernikahan */
+            function toggleMusic(e) {
+                if (e && e.preventDefault) e.preventDefault();
+                if (bgMusic.paused) {
+                    playMusic();
+                } else {
+                    bgMusic.pause();
+                    setMusicIcon(false);
+                }
+            }
+            musicBtn.addEventListener('click', toggleMusic);
+            musicBtn.addEventListener('touchend', toggleMusic, { passive: false });
 
-  /* ---------- EDIT TARGET DATE HERE ---------- */
-  var TARGET_DATE = new Date('2027-06-12T08:00:00+07:00');
+            /* ===== BURST PETALS (big flower) ===== */
+            function spawnBurstPetals(count) {
+                var colors = ['#C97B90', '#E3C892', '#F7E3E2', '#8B4A5C', '#9DB08F'];
+                var maxReach = Math.max(window.innerWidth, window.innerHeight) * 0.68;
+                for (var i = 0; i < count; i++) {
+                    (function(i) {
+                        var el = document.createElement('span');
+                        el.className = 'burst-petal';
+                        var size = 9 + Math.random() * 17;
+                        el.style.width = size + 'px';
+                        el.style.height = size + 'px';
+                        el.innerHTML = makePetalSVG(colors[i % colors.length]);
+                        bloomOverlay.appendChild(el);
 
-  function pad(n){ return String(n).padStart(2,'0'); }
+                        var angle = Math.random() * Math.PI * 2;
+                        var dist = 90 + Math.random() * maxReach;
+                        var dx = Math.cos(angle) * dist;
+                        var dy = Math.sin(angle) * dist;
+                        var rot = Math.random() * 900 - 450;
+                        var scale = 0.4 + Math.random() * 0.9;
+                        var dur = 0.9 + Math.random() * 0.9;
+                        var delay = Math.random() * 0.18;
 
-  function tickCountdown(){
-    var now = new Date();
-    var diff = TARGET_DATE - now;
-    if (diff < 0) diff = 0;
-    var days = Math.floor(diff / (1000*60*60*24));
-    var hours = Math.floor((diff / (1000*60*60)) % 24);
-    var mins = Math.floor((diff / (1000*60)) % 60);
-    var secs = Math.floor((diff / 1000) % 60);
-    document.getElementById('cd-days').textContent = pad(days);
-    document.getElementById('cd-hours').textContent = pad(hours);
-    document.getElementById('cd-mins').textContent = pad(mins);
-    document.getElementById('cd-secs').textContent = pad(secs);
-  }
-  tickCountdown();
-  setInterval(tickCountdown, 1000);
+                        el.style.transition =
+                            'transform ' + dur + 's cubic-bezier(.16,1,.3,1) ' + delay + 's, ' +
+                            'opacity ' + dur + 's ease-out ' + delay + 's';
 
-  /* ---------- MAP LINK (edit query as needed) ---------- */
-  document.getElementById('mapBtn').href =
-    'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('[Nama Gedung / Rumah], [Alamat Lengkap]');
+                        requestAnimationFrame(function() {
+                            requestAnimationFrame(function() {
+                                el.style.transform =
+                                    'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot +
+                                    'deg) scale(' + scale + ')';
+                                el.style.opacity = '0';
+                            });
+                        });
+                    })(i);
+                }
+            }
 
-  /* ---------- COPY TO CLIPBOARD ---------- */
-  document.querySelectorAll('.btn-copy').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var text = btn.getAttribute('data-copy');
-      var done = function(){
-        var original = btn.textContent;
-        btn.textContent = 'Tersalin!';
-        btn.classList.add('copied');
-        setTimeout(function(){ btn.textContent = original; btn.classList.remove('copied'); }, 1600);
-      };
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(done).catch(done);
-      } else {
-        done();
-      }
-    });
-  });
+            /* ===== PETAL SVG helper ===== */
+            function makePetalSVG(color) {
+                return '<svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">' +
+                    '<path d="M11 1 C16 4 20 8 20 12 C20 17 16 20 11 20 C6 20 2 17 2 12 C2 8 6 4 11 1 Z" ' +
+                    'fill="' + color + '" stroke="rgba(255,255,255,0.5)" stroke-width="0.6"/>' +
+                    '<path d="M11 3 C11 9 11 14 11 19" stroke="rgba(255,255,255,0.35)" stroke-width="0.6" fill="none"/>' +
+                    '</svg>';
+            }
 
-})();
-</script>
+            /* ===== COUNTDOWN ===== */
+            var TARGET_DATE = new Date('2027-06-12T08:00:00+07:00');
+
+            function pad(n) { return String(n).padStart(2, '0'); }
+
+            function tickCountdown() {
+                var now = new Date();
+                var diff = TARGET_DATE - now;
+                if (diff < 0) diff = 0;
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                var mins = Math.floor((diff / (1000 * 60)) % 60);
+                var secs = Math.floor((diff / 1000) % 60);
+                document.getElementById('cd-days').textContent = pad(days);
+                document.getElementById('cd-hours').textContent = pad(hours);
+                document.getElementById('cd-mins').textContent = pad(mins);
+                document.getElementById('cd-secs').textContent = pad(secs);
+            }
+            tickCountdown();
+            setInterval(tickCountdown, 1000);
+
+            /* ===== MAP ===== */
+            document.getElementById('mapBtn').href =
+                'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(
+                    '[Nama Gedung / Rumah], [Alamat Lengkap]');
+
+            /* ===== COPY ===== */
+            document.querySelectorAll('.btn-copy').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var text = btn.getAttribute('data-copy');
+                    var done = function() {
+                        var original = btn.textContent;
+                        btn.textContent = 'Tersalin!';
+                        btn.classList.add('copied');
+                        setTimeout(function() { btn.textContent = original;
+                            btn.classList.remove('copied'); }, 1600);
+                    };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done).catch(done);
+                    } else {
+                        done();
+                    }
+                });
+            });
+
+        })();
+    </script>
 </body>
 </html>
