@@ -154,6 +154,65 @@
     .burst-petal{transition:none !important; opacity:0 !important;}
   }
 
+  /* ===================== BUNGA 3D DI SISI KIRI/KANAN (mengambang, bisa diklik) ===================== */
+  #fxOverlay{position:fixed; inset:0; z-index:65; pointer-events:none;}
+  .fx-petal{
+    position:fixed; top:0; left:0; will-change:transform, opacity;
+    transform:translate(-50%,-50%) scale(.5) rotate(0deg);
+    opacity:1;
+  }
+  .fx-petal svg{display:block; width:100%; height:100%;}
+
+  .side-flower{
+    position:fixed; z-index:6; cursor:pointer; pointer-events:auto;
+    width:clamp(26px, 6.5vw, 56px); height:clamp(26px, 6.5vw, 56px);
+    color:var(--rose);
+    filter:drop-shadow(0 4px 9px rgba(46,20,27,.28));
+    transform-style:preserve-3d;
+    animation:floatSide3d 7s ease-in-out infinite;
+    transition:transform .4s cubic-bezier(.34,1.7,.4,1), filter .3s ease;
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .side-flower svg{display:block; width:100%; height:100%;}
+  .side-flower.left{left:-4px;}
+  .side-flower.right{right:-4px;}
+  .side-flower:hover{filter:drop-shadow(0 6px 14px rgba(46,20,27,.4));}
+  .side-flower.popped{animation:none !important; transform:scale(1.5) rotateY(0deg) !important;}
+  @keyframes floatSide3d{
+    0%{ transform:translateY(0) rotateY(0deg) rotateX(0deg) rotateZ(0deg); }
+    25%{ transform:translateY(-16px) rotateY(120deg) rotateX(14deg) rotateZ(4deg); }
+    50%{ transform:translateY(0) rotateY(220deg) rotateX(-10deg) rotateZ(-4deg); }
+    75%{ transform:translateY(16px) rotateY(300deg) rotateX(10deg) rotateZ(3deg); }
+    100%{ transform:translateY(0) rotateY(360deg) rotateX(0deg) rotateZ(0deg); }
+  }
+  @media (max-width:480px){
+    .side-flower{opacity:.85;}
+    .side-flower.hide-narrow{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .side-flower{animation:none;}
+  }
+
+  /* ===================== TOMBOL MUSIK ===================== */
+  #musicToggle{
+    position:fixed; right:16px; bottom:16px; z-index:70;
+    width:52px; height:52px; border-radius:50%; border:1px solid var(--gold-soft);
+    background:linear-gradient(135deg, var(--ink), var(--ink-deep));
+    color:var(--gold-soft); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; box-shadow:0 6px 18px rgba(46,20,27,.35);
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  #musicToggle svg{width:22px; height:22px;}
+  #musicToggle .ring{
+    position:absolute; inset:-6px; border-radius:50%; border:1px solid var(--gold-soft);
+    opacity:0; animation:musicRing 2.2s ease-out infinite;
+  }
+  #musicToggle.playing .ring{opacity:.55;}
+  @keyframes musicRing{
+    0%{ transform:scale(.85); opacity:.55; }
+    100%{ transform:scale(1.35); opacity:0; }
+  }
+
   /* ===================== MAIN CONTENT ===================== */
   #content{opacity:0; transition:opacity .8s ease .1s;}
   #content.visible{opacity:1;}
@@ -362,6 +421,41 @@
 <div id="bloomOverlay" aria-hidden="true">
   <svg class="bloom-flower" id="bloomFlower" viewBox="0 0 200 200"><use href="#bigBloom"/></svg>
 </div>
+
+<!-- overlay untuk efek kelopak saat bunga sisi diklik -->
+<div id="fxOverlay" aria-hidden="true"></div>
+
+<!-- ===================== BUNGA 3D DI SISI KIRI & KANAN (mengambang, bisa diklik) ===================== -->
+<div class="side-flower left" data-size="1" style="top:8%; animation-duration:8.2s; animation-delay:.2s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower left" data-size="2" style="top:26%; animation-duration:6.4s; animation-delay:1.1s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower left hide-narrow" data-size="3" style="top:46%; animation-duration:9s; animation-delay:.6s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower left" data-size="2" style="top:65%; animation-duration:7.1s; animation-delay:1.6s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower left hide-narrow" data-size="1" style="top:85%; animation-duration:8.6s; animation-delay:.4s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+
+<div class="side-flower right" data-size="2" style="top:14%; animation-duration:7.6s; animation-delay:.8s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower right hide-narrow" data-size="1" style="top:34%; animation-duration:6.8s; animation-delay:1.4s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower right" data-size="3" style="top:55%; animation-duration:9.4s; animation-delay:.3s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower right" data-size="2" style="top:74%; animation-duration:7.3s; animation-delay:1.2s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+<div class="side-flower right hide-narrow" data-size="1" style="top:92%; animation-duration:8.9s; animation-delay:.7s;"><svg viewBox="0 0 120 170"><use href="#roseBloom"/></svg></div>
+
+<!-- ===================== MUSIK LATAR ===================== -->
+<!-- CATATAN: ganti "musik-bernaung-feby-putri.mp3" dengan file lagu berlisensi milik Anda,
+     letakkan di folder yang sama dengan file index.html ini -->
+<audio id="bgMusic" loop preload="none">
+  <source src="musik-bernaung-feby-putri.mp3" type="audio/mpeg">
+</audio>
+<button id="musicToggle" type="button" aria-label="Putar / jeda musik">
+  <span class="ring"></span>
+  <svg id="musicIconOn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="display:none;">
+    <path d="M9 18V5l10-2v13" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>
+  </svg>
+  <svg id="musicIconOff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+    <path d="M9 18V5l10-2v13" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/>
+    <path d="M3 3l18 18" stroke-linecap="round"/>
+  </svg>
+</button>
 
 <!-- ===================== MAIN CONTENT ===================== -->
 <main id="content">
@@ -589,10 +683,104 @@
       bloomOverlay.innerHTML = '';
       bloomOverlay.style.display = 'none';
     }, 2500);
+
+    /* musik latar mulai bersamaan dengan bunga mekar (dipicu oleh gestur klik pengguna) */
+    playMusic();
   }
 
   openBtn.addEventListener('click', openBloom);
   openBtn.addEventListener('touchend', openBloom, {passive:false});
+
+  /* ---------- bunga 3D di sisi kiri/kanan: bisa diklik, memancarkan kelopak ---------- */
+  var fxOverlay = document.getElementById('fxOverlay');
+
+  function spawnMiniBurst(cx, cy, count){
+    var colors = ['#C97B90', '#E3C892', '#F7E3E2', '#8B4A5C', '#9DB08F'];
+    for (var i = 0; i < count; i++){
+      (function(i){
+        var el = document.createElement('span');
+        el.className = 'fx-petal';
+        var size = 8 + Math.random() * 13;
+        el.style.width = size + 'px';
+        el.style.height = size + 'px';
+        el.style.left = cx + 'px';
+        el.style.top = cy + 'px';
+        el.innerHTML = makePetalSVG(colors[i % colors.length]);
+        fxOverlay.appendChild(el);
+
+        var angle = Math.random() * Math.PI * 2;
+        var dist = 40 + Math.random() * 130;
+        var dx = Math.cos(angle) * dist;
+        var dy = Math.sin(angle) * dist;
+        var rot = Math.random() * 720 - 360;
+        var scale = 0.4 + Math.random() * 0.8;
+        var dur = 0.7 + Math.random() * 0.6;
+        var delay = Math.random() * 0.1;
+
+        el.style.transition =
+          'transform ' + dur + 's cubic-bezier(.16,1,.3,1) ' + delay + 's, ' +
+          'opacity ' + dur + 's ease-out ' + delay + 's';
+
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            el.style.transform =
+              'translate(-50%,-50%) translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg) scale(' + scale + ')';
+            el.style.opacity = '0';
+          });
+        });
+
+        setTimeout(function(){
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }, (dur + delay) * 1000 + 120);
+      })(i);
+    }
+  }
+
+  var sideFlowers = document.querySelectorAll('.side-flower');
+  sideFlowers.forEach(function(el){
+    function pop(e){
+      if (e && e.preventDefault) e.preventDefault();
+      var rect = el.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      var cy = rect.top + rect.height / 2;
+      el.classList.add('popped');
+      spawnMiniBurst(cx, cy, 22);
+      setTimeout(function(){ el.classList.remove('popped'); }, 500);
+    }
+    el.addEventListener('click', pop);
+    el.addEventListener('touchend', pop, {passive:false});
+  });
+
+  /* ---------- musik latar ---------- */
+  var bgMusic = document.getElementById('bgMusic');
+  var musicBtn = document.getElementById('musicToggle');
+  var iconOn = document.getElementById('musicIconOn');
+  var iconOff = document.getElementById('musicIconOff');
+
+  function setMusicIcon(playing){
+    iconOn.style.display = playing ? 'block' : 'none';
+    iconOff.style.display = playing ? 'none' : 'block';
+    musicBtn.classList.toggle('playing', playing);
+  }
+
+  function playMusic(){
+    if (!bgMusic) return;
+    var p = bgMusic.play();
+    if (p && p.catch) { p.then(function(){ setMusicIcon(true); }).catch(function(){ setMusicIcon(false); }); }
+    else { setMusicIcon(true); }
+  }
+
+  function toggleMusic(e){
+    if (e && e.preventDefault) e.preventDefault();
+    if (bgMusic.paused){
+      playMusic();
+    } else {
+      bgMusic.pause();
+      setMusicIcon(false);
+    }
+  }
+  musicBtn.addEventListener('click', toggleMusic);
+  musicBtn.addEventListener('touchend', toggleMusic, {passive:false});
 
   /* ---------- kelopak ledakan dari tengah bunga besar ---------- */
   function spawnBurstPetals(count){
