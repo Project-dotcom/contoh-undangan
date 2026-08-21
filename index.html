@@ -43,6 +43,7 @@
         body.locked {
             overflow: hidden;
             height: 100vh;
+            height: 100dvh;
         }
         h1,
         h2,
@@ -119,6 +120,8 @@
         #cover {
             position: fixed;
             inset: 0;
+            height: 100vh;
+            height: 100dvh;
             z-index: 50;
             background: radial-gradient(circle at 50% 15%, rgba(203, 123, 144, 0.35), transparent 55%),
                 linear-gradient(180deg, var(--ink) 0%, var(--ink-deep) 100%);
@@ -126,6 +129,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow-y: auto;
+            padding: 24px 0;
             transition: opacity 1s ease, visibility 1s ease;
         }
         #cover.opened {
@@ -140,9 +145,11 @@
             border: 1px solid rgba(227, 200, 146, 0.45);
             max-width: 380px;
             width: calc(100% - 32px);
+            margin: auto;
             animation: fadeUp 1.1s ease both;
             background: rgba(46, 20, 27, 0.35);
             backdrop-filter: blur(2px);
+            overflow-wrap: break-word;
             z-index: 2;
         }
         @keyframes fadeUp {
@@ -412,6 +419,51 @@
             }
             .penutup .side-flower.right {
                 right: -8px;
+            }
+        }
+
+        /* ===== COVER: narrow-width guard (prevents corner ornaments overlapping text) ===== */
+        @media (max-width: 360px) {
+            .corner-frame svg {
+                width: 50px;
+                height: 50px;
+            }
+            .cover-inner {
+                padding: 30px 16px;
+            }
+        }
+
+        /* ===== COVER: short-height guard (landscape phones / small screens) ===== */
+        @media (max-height: 700px) {
+            #cover {
+                align-items: flex-start;
+            }
+            .cover-inner {
+                padding: 24px 20px;
+            }
+            .cover-names {
+                margin: 12px 0 4px;
+            }
+            .cover-to {
+                margin-top: 14px;
+            }
+            .btn-open {
+                margin-top: 16px;
+            }
+        }
+        @media (max-height: 480px) {
+            .cover-flower {
+                display: none;
+            }
+            .cover-inner {
+                padding: 18px 16px;
+            }
+            .cover-to {
+                margin-top: 10px;
+                line-height: 1.4;
+            }
+            .btn-open {
+                margin-top: 12px;
             }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -1153,7 +1205,7 @@
 
     <!-- ===== MUSIC ===== -->
     <audio id="bgMusic" loop preload="none">
-        <source src="musik-bernaung-feby-putri-reff.mp3" type="audio/mpeg" />
+        <source src="musik-bernaung-feby-putri.mp3" type="audio/mpeg" />
     </audio>
     <button id="musicToggle" type="button" aria-label="Putar / jeda musik">
         <span class="ring"></span>
