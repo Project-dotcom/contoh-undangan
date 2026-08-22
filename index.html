@@ -174,6 +174,61 @@
             color: #EBD9D6;
             line-height: 1.7;
         }
+        .cover-photo-wrap {
+            position: relative;
+            max-width: 240px;
+            margin: 22px auto 0;
+            padding: 22px;
+        }
+        .cover-photo-grid-bg {
+            position: absolute;
+            inset: 6px;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(227,200,146,0.35) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(227,200,146,0.35) 1px, transparent 1px);
+            background-size: 16px 16px;
+            opacity: .8;
+        }
+        .cover-photo-grid-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 35%, var(--ink-deep) 82%);
+        }
+        .cover-photo-frame {
+            position: relative;
+            z-index: 1;
+            padding: 8px;
+            background: var(--ivory);
+            border: 1px solid var(--gold);
+            box-shadow: 0 14px 30px rgba(0,0,0,.4), 0 0 0 5px rgba(203,163,92,.16);
+        }
+        .cover-photo-frame-inner {
+            position: relative;
+            border: 1px solid var(--gold-soft);
+            overflow: hidden;
+        }
+        .cover-photo-frame img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            display: block;
+        }
+        .cover-photo-flower {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            color: var(--gold-soft);
+            opacity: .95;
+            z-index: 2;
+            filter: drop-shadow(0 3px 8px rgba(0,0,0,.4));
+        }
+        .cover-photo-flower.tl { top:-12px; left:-12px; }
+        .cover-photo-flower.tr { top:-12px; right:-12px; transform:scaleX(-1); }
+        .cover-photo-flower.bl { bottom:-12px; left:-12px; transform:scaleY(-1); }
+        .cover-photo-flower.br { bottom:-12px; right:-12px; transform:scale(-1,-1); }
         .btn-open {
             margin-top: 24px;
             font-family: var(--font-body);
@@ -336,6 +391,7 @@
             .cover-flower { display:none; }
             .cover-inner { padding:18px 16px; }
             .cover-to { margin-top:10px; line-height:1.4; }
+            .cover-photo-wrap { max-width:180px; padding:14px; margin-top:12px; }
             .btn-open { margin-top:12px; }
         }
         @media (prefers-reduced-motion: reduce) { .side-flower-inner { animation:none; } }
@@ -476,6 +532,7 @@
         .sf-mempelai-l { bottom:-20px; left:-40px; color:var(--rose-deep); opacity:.12; }
         .sf-mempelai-r { bottom:-20px; right:-40px; color:var(--rose-deep); opacity:.12; }
         .sf-verse { bottom:-10px; right:-20px; color:var(--sage); opacity:.18; }
+        .sf-galeri { top:-20px; left:-30px; color:var(--gold); opacity:.14; }
         .sf-acara { top:-20px; right:-30px; color:var(--gold-soft); opacity:.13; }
         .sf-lokasi { top:-10px; left:-30px; color:var(--sage-deep); opacity:.14; }
         .sf-hadiah { top:-20px; right:-30px; color:var(--rose); opacity:.12; }
@@ -539,6 +596,82 @@
             font-size: .82rem;
             color: var(--text);
             line-height: 1.6;
+        }
+
+        /* ===== GALERI FOTO ===== */
+        .galeri { text-align:center; }
+        .galeri .eyebrow { color:var(--gold); text-align:center; }
+        .galeri h2 {
+            margin-top:14px;
+            font-style:italic;
+            font-size:clamp(1.6rem,5vw,2.1rem);
+            color:var(--rose-deep);
+        }
+        .galeri-frame-wrap {
+            position: relative;
+            max-width: 380px;
+            margin: 34px auto 0;
+            padding: 26px;
+        }
+        .galeri-grid-bg {
+            position: absolute;
+            inset: 6px;
+            z-index: 0;
+            background-image:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: .65;
+        }
+        .galeri-grid-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 40%, var(--ivory) 78%);
+        }
+        .galeri-frame {
+            position: relative;
+            z-index: 1;
+            padding: 10px;
+            background: var(--ivory);
+            border: 1px solid var(--gold);
+            box-shadow: 0 14px 34px rgba(139,74,92,.2), 0 0 0 6px rgba(203,163,92,.14);
+        }
+        .galeri-frame-inner {
+            position: relative;
+            border: 1px solid var(--gold-soft);
+            overflow: hidden;
+        }
+        .galeri-frame img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            display: block;
+        }
+        .galeri-flower {
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            color: var(--gold);
+            opacity: .9;
+            z-index: 2;
+            filter: drop-shadow(0 4px 10px rgba(46,20,27,.28));
+        }
+        .galeri-flower.tl { top:-16px; left:-16px; }
+        .galeri-flower.tr { top:-16px; right:-16px; transform:scaleX(-1); }
+        .galeri-flower.bl { bottom:-16px; left:-16px; transform:scaleY(-1); }
+        .galeri-flower.br { bottom:-16px; right:-16px; transform:scale(-1,-1); }
+        .galeri-caption {
+            margin-top: 22px;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: .98rem;
+            line-height: 1.7;
+            color: var(--text);
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* ===== ACARA ===== */
@@ -762,6 +895,7 @@
             .hero h1 { font-size:clamp(2rem,7vw,2.8rem); }
             .cover-inner { padding:32px 20px; width:calc(100% - 24px); }
             .cover-names { font-size:clamp(1.6rem,6vw,2.4rem); }
+            .cover-photo-wrap { max-width:210px; }
             .countdown .box { min-width:52px; padding:10px 12px; }
             .countdown .num { font-size:1.3rem; }
             .event-cards { grid-template-columns:1fr; }
@@ -773,6 +907,8 @@
             .gift-card { padding:14px 12px; }
             .gift-card .num { font-size:1rem; }
             .btn-copy { padding:6px 12px; font-size:.58rem; }
+            .galeri-frame-wrap { padding:18px; max-width:320px; }
+            .galeri-flower { width:32px; height:32px; }
         }
         @media (max-width: 400px) {
             section { padding:36px 12px; }
@@ -812,6 +948,8 @@
             .sf-acara, .sf-lokasi, .sf-hadiah, .sf-penutup { opacity:0.1; }
             .countdown .box { min-width:48px; padding:8px 10px; }
             .countdown .num { font-size:1.2rem; }
+            .galeri-frame-wrap { padding:16px; max-width:280px; }
+            .galeri-flower { width:28px; height:28px; }
             /* Force all elements to stay inside */
             * { max-width: 100vw !important; }
         }
@@ -885,6 +1023,18 @@
                 Kepada Bapak / Ibu / Saudara/i<br />
                 Tamu undangan yang berbahagia
             </p>
+            <div class="cover-photo-wrap">
+                <div class="cover-photo-grid-bg"></div>
+                <div class="cover-photo-frame">
+                    <div class="cover-photo-frame-inner">
+                        <img src="poto-cucu.png" alt="Foto kedua mempelai" />
+                    </div>
+                    <svg class="cover-photo-flower tl" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                    <svg class="cover-photo-flower tr" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                    <svg class="cover-photo-flower bl" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                    <svg class="cover-photo-flower br" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                </div>
+            </div>
             <button class="btn-open" id="openBtn" type="button">Buka Undangan ✿</button>
         </div>
     </div>
@@ -986,6 +1136,32 @@
                     </p>
                 </div>
             </div>
+        </section>
+
+        <div class="divider">
+            <span class="rule"></span>
+            <svg class="sprig" viewBox="0 0 26 26"><path d="M13 24 C13 16 13 10 13 2" stroke="#9DB08F" stroke-width="1" fill="none"/><ellipse cx="9" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(-30 9 9)"/><ellipse cx="17" cy="9" rx="3.4" ry="2" fill="#C97B90" transform="rotate(30 17 9)"/><ellipse cx="13" cy="4" rx="2.6" ry="1.8" fill="#E3C892"/></svg>
+            <span class="rule"></span>
+        </div>
+
+        <!-- GALERI FOTO -->
+        <section class="galeri">
+            <svg class="section-flower section-flower-md sf-galeri" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+            <p class="eyebrow">Our Moment</p>
+            <h2>Sepenggal Kisah Kami</h2>
+            <div class="galeri-frame-wrap">
+                <div class="galeri-grid-bg"></div>
+                <div class="galeri-frame">
+                    <div class="galeri-frame-inner">
+                        <img src="poto-cucu.png" alt="Foto kedua mempelai" loading="lazy" />
+                    </div>
+                    <svg class="galeri-flower tl" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                    <svg class="galeri-flower tr" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                    <svg class="galeri-flower bl" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                    <svg class="galeri-flower br" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                </div>
+            </div>
+            <p class="galeri-caption">"Setiap langkah dan tawa kami, menjadi kisah yang akan terus kami rajut bersama."</p>
         </section>
 
         <div class="divider">
