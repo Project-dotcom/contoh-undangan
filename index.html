@@ -921,7 +921,7 @@
 
             var ambientContainer = document.getElementById('ambientPetals');
             var ambientColors = ['#C97B90', '#E3C892', '#F7E3E2', '#8B4A5C', '#9DB08F'];
-            var ambientMax = 9;
+            var ambientMax = 20;
             var ambientActive = false;
             var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -997,10 +997,15 @@
                 if (ambientActive || reducedMotion) return;
                 ambientActive = true;
                 spawnAmbientPetal();
+                setTimeout(spawnAmbientPetal, 300);
                 setTimeout(spawnAmbientPetal, 700);
+                setTimeout(spawnAmbientPetal, 1100);
                 setInterval(function() {
                     spawnAmbientPetal();
-                }, 1900 + Math.random() * 1300);
+                    if (Math.random() < 0.6) {
+                        setTimeout(spawnAmbientPetal, 250 + Math.random() * 300);
+                    }
+                }, 650 + Math.random() * 500);
             }
 
             function buildOrnateFrame() {
