@@ -121,7 +121,7 @@
                 url('poto-cucu.png') center/cover no-repeat;
             color: var(--ivory);
             display: flex;
-            align-items: flex-start;
+            align-items: flex-end;
             justify-content: center;
             overflow-y: auto;
             padding: 24px 0;
@@ -139,7 +139,7 @@
             border: 1px solid rgba(227,200,146,0.45);
             max-width: 380px;
             width: calc(100% - 32px);
-            margin: 6vh auto 0;
+            margin: 0 auto 4vh;
             animation: fadeUp 1.1s ease both;
             background: rgba(46,20,27,0.5);
             backdrop-filter: blur(3px);
@@ -328,7 +328,7 @@
             .cover-inner { padding:30px 16px; }
         }
         @media (max-height: 700px) {
-            #cover { align-items: flex-start; }
+            #cover { align-items: flex-end; }
             .cover-inner { padding:24px 20px; }
             .cover-names { margin:12px 0 4px; }
             .cover-to { margin-top:14px; }
