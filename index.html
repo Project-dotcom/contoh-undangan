@@ -82,27 +82,12 @@
         @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
         .cover-inner .eyebrow { color: var(--gold-soft); }
 
-        /* photo — full, uncarded, framed only by flowers */
+        /* photo — oval, ornate floral frame */
         .cover-photo-wrap {
             position: relative;
-            width: min(80vw, 300px);
-            aspect-ratio: 3 / 4.35;
-            margin: 14px auto 22px;
-        }
-        .cover-photo-frame {
-            position: relative; width: 100%; height: 100%;
-            overflow: hidden; border: none; border-radius: 10px; box-shadow: none; background: transparent;
-        }
-        .cover-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .cover-photo-frame::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse 78% 70% at 50% 50%, transparent 55%, var(--ink-deep) 100%),
-                linear-gradient(to bottom, rgba(46,20,27,.55) 0%, transparent 14%, transparent 86%, rgba(46,20,27,.55) 100%);
-            mix-blend-mode: normal;
+            width: min(78vw, 300px);
+            aspect-ratio: 300 / 420;
+            margin: 14px auto 26px;
         }
         .cover-photo-glow {
             position: absolute;
@@ -112,23 +97,27 @@
             z-index: 0;
             pointer-events: none;
         }
-        .cover-bloom { position: absolute; pointer-events: none; z-index: 2; filter: drop-shadow(0 4px 10px rgba(0,0,0,.4)); }
-        .cover-bloom.tl { top:-22px; left:-20px; width:86px; height:122px; color:var(--rose); opacity:.98; transform:rotate(-18deg); z-index:3; }
-        .cover-bloom.tr { top:-26px; right:-22px; width:70px; height:98px; color:var(--gold-soft); opacity:.95; transform:scaleX(-1) rotate(-12deg); z-index:3; }
-        .cover-bloom.bl { bottom:-20px; left:-24px; width:68px; height:96px; color:var(--sage); opacity:.92; transform:rotate(22deg); z-index:3; }
-        .cover-bloom.br { bottom:-24px; right:-18px; width:80px; height:112px; color:var(--rose); opacity:.95; transform:scaleX(-1) rotate(16deg); z-index:3; }
-        .cover-bloom.l1 { top:10%; left:-16px; width:38px; height:54px; color:var(--gold-soft); opacity:.9; transform:rotate(-92deg); z-index:3; }
-        .cover-bloom.l2 { top:38%; left:-20px; width:44px; height:62px; color:var(--rose); opacity:.9; transform:rotate(-88deg); z-index:3; }
-        .cover-bloom.l3 { top:64%; left:-16px; width:36px; height:50px; color:var(--sage); opacity:.9; transform:rotate(-96deg); z-index:3; }
-        .cover-bloom.l4 { top:86%; left:-10px; width:28px; height:40px; color:var(--gold-soft); opacity:.88; transform:rotate(-100deg); z-index:3; }
-        .cover-bloom.r1 { top:12%; right:-16px; width:38px; height:54px; color:var(--sage); opacity:.9; transform:rotate(92deg) scaleX(-1); z-index:3; }
-        .cover-bloom.r2 { top:40%; right:-20px; width:44px; height:62px; color:var(--gold-soft); opacity:.9; transform:rotate(88deg) scaleX(-1); z-index:3; }
-        .cover-bloom.r3 { top:66%; right:-16px; width:36px; height:50px; color:var(--rose); opacity:.9; transform:rotate(96deg) scaleX(-1); z-index:3; }
-        .cover-bloom.r4 { top:88%; right:-10px; width:28px; height:40px; color:var(--sage); opacity:.88; transform:rotate(100deg) scaleX(-1); z-index:3; }
-        .cover-bloom.tl-mini { top:14px; left:10px; width:34px; height:48px; color:var(--gold-soft); opacity:.85; transform:rotate(-42deg); z-index:3; }
-        .cover-bloom.tr-mini { top:16px; right:8px; width:32px; height:46px; color:var(--rose); opacity:.85; transform:scaleX(-1) rotate(-38deg); z-index:3; }
-        .cover-bloom.bl-mini { bottom:14px; left:8px; width:30px; height:42px; color:var(--rose); opacity:.85; transform:rotate(40deg); z-index:3; }
-        .cover-bloom.br-mini { bottom:16px; right:10px; width:32px; height:46px; color:var(--sage); opacity:.85; transform:scaleX(-1) rotate(36deg); z-index:3; }
+        .ornate-frame {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            z-index: 3; pointer-events: none; overflow: visible;
+        }
+        .cover-photo-frame {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 68%; height: 75%;
+            overflow: hidden; border-radius: 50%; box-shadow: none; background: transparent;
+            z-index: 1;
+        }
+        .cover-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cover-photo-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 85% 85% at 50% 50%, transparent 60%, var(--ink-deep) 100%),
+                linear-gradient(to bottom, rgba(46,20,27,.35) 0%, transparent 16%, transparent 84%, rgba(46,20,27,.35) 100%);
+            mix-blend-mode: normal;
+        }
 
         .cover-names {
             font-family: var(--font-display); font-style: italic;
@@ -376,15 +365,7 @@
             .hero h1 { font-size:clamp(2rem,7vw,2.8rem); }
             .cover-inner { padding:26px 18px; width:calc(100% - 24px); }
             .cover-names { font-size:clamp(1.6rem,6vw,2.4rem); }
-            .cover-photo-wrap { width:min(78vw,260px); margin:12px auto 18px; }
-            .cover-bloom.tl { width:64px; height:90px; top:-24px; left:-22px; }
-            .cover-bloom.tr { width:52px; height:74px; top:-28px; right:-24px; }
-            .cover-bloom.bl { width:50px; height:72px; bottom:-22px; left:-24px; }
-            .cover-bloom.br { width:58px; height:82px; bottom:-26px; right:-18px; }
-            .cover-bloom.l1, .cover-bloom.l2, .cover-bloom.l3, .cover-bloom.l4,
-            .cover-bloom.r1, .cover-bloom.r2, .cover-bloom.r3, .cover-bloom.r4 { width:26px; height:38px; }
-            .cover-bloom.tl-mini, .cover-bloom.tr-mini,
-            .cover-bloom.bl-mini, .cover-bloom.br-mini { width:22px; height:32px; }
+            .cover-photo-wrap { width:min(80vw,270px); margin:12px auto 20px; }
             .countdown .box { min-width:52px; padding:10px 12px; }
             .countdown .num { font-size:1.3rem; }
             .event-cards { grid-template-columns:1fr; }
@@ -499,24 +480,9 @@
 
             <div class="cover-photo-wrap">
                 <div class="cover-photo-glow"></div>
-                <svg class="cover-bloom tl" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom tr" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom bl" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom br" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom l1" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom l2" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom l3" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom l4" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom r1" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom r2" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom r3" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom r4" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom tl-mini" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom tr-mini" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom bl-mini" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
-                <svg class="cover-bloom br-mini" viewBox="0 0 120 170"><use href="#roseBloom"/></svg>
+                <svg class="ornate-frame" id="ornateFrame" viewBox="0 0 300 420" preserveAspectRatio="xMidYMid meet"></svg>
                 <div class="cover-photo-frame">
-                    <img src="poto-cucu-1.png" alt="Foto kedua mempelai" />
+                    <img src="poto-cucu-2.png" alt="Foto kedua mempelai" />
                 </div>
             </div>
 
@@ -911,6 +877,75 @@
                     '<path d="M11 3 C11 9 11 14 11 19" stroke="rgba(255,255,255,0.35)" stroke-width="0.6" fill="none"/>' +
                     '</svg>';
             }
+
+            function buildOrnateFrame() {
+                var svg = document.getElementById('ornateFrame');
+                if (!svg) return;
+                var ns = 'http://www.w3.org/2000/svg';
+                var W = 300, H = 420, cx = W / 2, cy = H / 2;
+                var rxOuter = 128, ryOuter = 195;
+                var rxInner = 110, ryInner = 168;
+                var rxBead = (rxOuter + rxInner) / 2, ryBead = (ryOuter + ryInner) / 2;
+                var frag = document.createDocumentFragment();
+                var goldSoft = '#E3C892', gold = '#CBA35C', rose = '#C97B90', roseDeep = '#8B4A5C', sage = '#9DB08F';
+
+                function ring(rx, ry, color, w, op) {
+                    var e = document.createElementNS(ns, 'ellipse');
+                    e.setAttribute('cx', cx); e.setAttribute('cy', cy);
+                    e.setAttribute('rx', rx); e.setAttribute('ry', ry);
+                    e.setAttribute('fill', 'none'); e.setAttribute('stroke', color);
+                    e.setAttribute('stroke-width', w); e.setAttribute('opacity', op);
+                    frag.appendChild(e);
+                }
+                ring(rxOuter, ryOuter, gold, 1.4, 0.85);
+                ring(rxInner, ryInner, goldSoft, 0.9, 0.7);
+
+                var beadCount = 56;
+                for (var i = 0; i < beadCount; i++) {
+                    var t = (i / beadCount) * Math.PI * 2;
+                    var x = cx + rxBead * Math.sin(t);
+                    var y = cy - ryBead * Math.cos(t);
+                    var c = document.createElementNS(ns, 'circle');
+                    c.setAttribute('cx', x); c.setAttribute('cy', y);
+                    c.setAttribute('r', i % 4 === 0 ? 2.8 : 1.4);
+                    c.setAttribute('fill', i % 4 === 0 ? rose : goldSoft);
+                    c.setAttribute('opacity', '0.92');
+                    frag.appendChild(c);
+                }
+
+                var anchors = [
+                    { deg: 0,   size: 58, color: rose },
+                    { deg: 40,  size: 34, color: goldSoft },
+                    { deg: 80,  size: 40, color: sage },
+                    { deg: 120, size: 34, color: goldSoft },
+                    { deg: 160, size: 40, color: rose },
+                    { deg: 180, size: 50, color: roseDeep },
+                    { deg: 200, size: 40, color: rose },
+                    { deg: 240, size: 34, color: goldSoft },
+                    { deg: 280, size: 40, color: sage },
+                    { deg: 320, size: 34, color: goldSoft }
+                ];
+                anchors.forEach(function(a) {
+                    var t = a.deg * Math.PI / 180;
+                    var x = cx + rxOuter * Math.sin(t);
+                    var y = cy - ryOuter * Math.cos(t);
+                    var h = a.size, w = a.size * (120 / 170);
+                    var use = document.createElementNS(ns, 'use');
+                    use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#roseBloom');
+                    use.setAttribute('href', '#roseBloom');
+                    use.setAttribute('width', w);
+                    use.setAttribute('height', h);
+                    use.setAttribute('x', x - w / 2);
+                    use.setAttribute('y', y - h / 2);
+                    use.setAttribute('transform', 'rotate(' + a.deg + ' ' + x + ' ' + y + ')');
+                    use.setAttribute('color', a.color);
+                    use.setAttribute('opacity', '0.96');
+                    frag.appendChild(use);
+                });
+
+                svg.appendChild(frag);
+            }
+            buildOrnateFrame();
 
             var TARGET_DATE = new Date('2026-11-14T08:00:00+07:00');
 
